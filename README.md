@@ -1,6 +1,6 @@
 # react-native-kpframework-gallery
 
-图片浏览器，支持左右滑动，手势缩放，双击缩放，网络图片下载缓存并显示，本地图片显示
+图片浏览器，支持左右滑动，手势缩放，双击缩放，网络图片下载缓存并显示，本地图片显示。支持超大图片的浏览。
 
 ## 原生库
 
@@ -67,7 +67,7 @@ KPGallery.showGallery({ images },
 | -------- | ------------------------------ | ----------------------- | ------ |
 | images  | 图片数据数组，见下面的`image`说明                       | array | 无     |
 | index | 初始显示第几张         | number                  | 0      |
-| debug  | 是否开启debug模式,仅android端有效                     | bool                | 无     |
+| debug  | 是否开启debug模式,仅android端有效                     | bool                | false     |
 | minScale     | 最小缩放比例，为0表示自动控制 | number                 | 0   |
 | maxScale     | 最大缩放比例，为0表示自动控制 | number                 | 0   |
 
