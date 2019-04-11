@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/fill"
+    xmlns:gallery="http://schemas.android.com/apk/res-auto"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/horizontal_pager"
+        style="@style/fill" />
+
+    <com.xukj.kpframework.gallery.ViewPagerBar
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        gallery:right_button_visible="false"
+        gallery:title_background_color="@android:color/transparent"
+        gallery:left_button_visible="true"
+        gallery:left_button_drawable="@drawable/ic_close"/>
+
+    <!--<Button-->
+    <!--android:text="原生按钮_点击退出"-->
+    <!--android:onClick="onBack"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"/>-->
+
+</RelativeLayout>

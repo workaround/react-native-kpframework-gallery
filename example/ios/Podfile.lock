@@ -1,0 +1,67 @@
+PODS:
+  - React (0.56.1):
+    - React/Core (= 0.56.1)
+  - React/Core (0.56.1):
+    - yoga (= 0.56.1.React)
+  - React/fishhook (0.56.1)
+  - React/RCTActionSheet (0.56.1):
+    - React/Core
+  - React/RCTAnimation (0.56.1):
+    - React/Core
+  - React/RCTBlob (0.56.1):
+    - React/Core
+  - React/RCTGeolocation (0.56.1):
+    - React/Core
+  - React/RCTImage (0.56.1):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.56.1):
+    - React/Core
+  - React/RCTNetwork (0.56.1):
+    - React/Core
+  - React/RCTSettings (0.56.1):
+    - React/Core
+  - React/RCTText (0.56.1):
+    - React/Core
+  - React/RCTVibration (0.56.1):
+    - React/Core
+  - React/RCTWebSocket (0.56.1):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - RNVectorIcons (6.0.2):
+    - React
+  - yoga (0.56.1.React)
+
+DEPENDENCIES:
+  - React/Core (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTBlob (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
+
+SPEC CHECKSUMS:
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: 7e0d664aa35980a4f6c07ca7f15f2c1bb5e976e5
+
+COCOAPODS: 1.5.3
