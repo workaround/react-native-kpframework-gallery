@@ -65,10 +65,7 @@ export default class HomePage extends React.PureComponent {
 
 const images = [
     {
-        source: {
-            uri:
-                'https://r.photo.store.qq.com/psb?/43967169/eWlMurWU5GXLj0Ys4bcVYGKWUYFNn9V87DEmr2g1fAk!/r/dL8AAAAAAAAA',
-        },
+        source: require('./test00.png'),
     },
     {
         source: {

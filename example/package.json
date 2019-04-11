@@ -11,8 +11,8 @@
         "prop-types": "15.6.2",
         "react": "16.4.1",
         "react-native": "0.56.1",
-        "react-native-router-flux": "4.0.1",
-        "react-native-kpframework-gallery": "../"
+        "react-native-kpframework-gallery": "../",
+        "react-native-router-flux": "4.0.1"
     },
     "devDependencies": {
         "@babel/core": "7.0.0-beta.47",
