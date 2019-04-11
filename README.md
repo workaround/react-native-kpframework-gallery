@@ -2,6 +2,7 @@
 
 [![](https://img.shields.io/npm/v/react-native-kpframework-gallery.svg?style=flat-square)](https://www.npmjs.com/package/react-native-kpframework-gallery)
 [![](https://img.shields.io/npm/dm/react-native-kpframework-gallery.svg?style=flat-square)](https://www.npmjs.com/package/react-native-kpframework-gallery)
+[![](https://img.shields.io/github/license/xuwaer/KPFrameworkRN.svg?style=flat-square)](https://github.com/xuwaer/KPFrameworkRN/blob/master/LICENSE)
 
 图片浏览器，支持左右滑动，手势缩放，双击缩放，网络图片下载缓存并显示，本地图片显示。支持超大图片的浏览。
 
