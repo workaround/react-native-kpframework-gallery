@@ -9,9 +9,10 @@ import android.os.Parcelable;
 public class PhotoImage implements Parcelable {
 
     private String uri;
-    private float minScale = 0;
-    private float maxScale = 0;
-    private boolean debug = false;
+    private float minScale;
+    private float maxScale;
+    private boolean debug;
+    private String mode;
 
     public static PhotoImage withUri(String uri) {
         PhotoImage image = new PhotoImage();
@@ -28,6 +29,7 @@ public class PhotoImage implements Parcelable {
         minScale = parcel.readFloat();
         maxScale = parcel.readFloat();
         debug = parcel.readByte() != 0;
+        mode = parcel.readString();
     }
 
     @Override
@@ -40,7 +42,8 @@ public class PhotoImage implements Parcelable {
         parcel.writeString(uri);
         parcel.writeFloat(minScale);
         parcel.writeFloat(maxScale);
-        parcel.writeByte((byte)(debug ? 1 : 0));
+        parcel.writeByte((byte) (debug ? 1 : 0));
+        parcel.writeString(mode);
     }
 
     public static final Creator<PhotoImage> CREATOR = new Creator<PhotoImage>() {
@@ -86,4 +89,8 @@ public class PhotoImage implements Parcelable {
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
+
+    public String getMode() { return mode; }
+
+    public void setMode(String mode) { this.mode = mode; }
 }

@@ -60,5 +60,10 @@ typings/
 # next.js build output
 .next
 
-# 
+# Android/IntelliJ
+#
 build/
+.idea
+.gradle
+local.properties
+*.iml

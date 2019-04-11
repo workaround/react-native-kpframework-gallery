@@ -52,7 +52,7 @@ export default class HomePage extends React.PureComponent {
         // }, null, null);
         console.log('images', images);
         KPGallery.showGallery(
-            { images, index: 1, debug: true, maxScale: 2 },
+            { images, debug: true },
             index => {
                 console.log('callback', index);
             },

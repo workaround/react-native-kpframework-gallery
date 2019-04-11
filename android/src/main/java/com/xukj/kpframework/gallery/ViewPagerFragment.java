@@ -95,21 +95,60 @@ public class ViewPagerFragment extends Fragment {
 
             @Override
             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-                if (image.getMinScale() > 0) {
-                    mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
-                    mImageView.setMinScale(image.getMinScale());
+
+                switch (image.getMode()) {
+                    case "custom":
+                        setCustomMode(resource, image);
+                        break;
+                    case "crop":
+                        setInsideMode(resource, image);
+                        break;
+                    default:
+                        setCropMode(resource, image);
+                        break;
                 }
 
-                if (image.getMaxScale() > 0) {
-                    mImageView.setMaxScale(image.getMaxScale());
-                }
-
-                mImageView.setDebug(image.isDebug());
-                mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
                 mTextView.setVisibility(View.GONE);
                 mProgress.setVisibility(View.GONE);
             }
         });
 
+    }
+
+    /**
+     * 高宽都在视图范围内
+     */
+    private void setInsideMode(File resource, PhotoImage image) {
+        mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_INSIDE);
+        mImageView.setDebug(image.isDebug());
+        mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
+    }
+
+    /**
+     * 图片显示宽度等于视图宽度(如果图片原始宽度小于视图宽度则默认inside)
+     *
+     * @param resource
+     */
+    private void setCropMode(File resource, PhotoImage image) {
+        float scale = ScreenUtils.getImageScaleForScreenWidth(getContext(), resource);
+        if (scale < 1) {
+            // 原图比屏幕宽
+            mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
+            mImageView.setMinScale(scale);
+        }
+
+        mImageView.setDebug(image.isDebug());
+        mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
+    }
+
+    /**
+     * 自定义模式
+     */
+    private void setCustomMode(File resource, PhotoImage image) {
+        mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
+        mImageView.setMinScale(image.getMinScale());
+        mImageView.setMaxScale(image.getMaxScale());
+        mImageView.setDebug(image.isDebug());
+        mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
     }
 }
