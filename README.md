@@ -72,13 +72,25 @@ KPGallery.showGallery({ images },
 | images  | 图片数据数组，见下面的`image`说明                       | array | 无     |
 | index | 初始显示第几张         | number                  | 0      |
 | debug  | 是否开启debug模式,仅android端有效                     | bool                | false     |
-| minScale     | 最小缩放比例，为0表示自动控制 | number                 | 0   |
-| maxScale     | 最大缩放比例，为0表示自动控制 | number                 | 0   |
+| minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5   |
+| maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
+| mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
+  
+`inside`缩放图片至全部显示；  
+`crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
+`custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`
 
-**image** 单个图片说明
+**image** 单个图片属性
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
 | source  | 与react-native 的 Image source一致                       |  | 无     |
-| minScale     | 最小缩放比例，为0表示自动 | number                 | 0   |
-| maxScale     | 最大缩放比例，为0表示自动 | number                 | 0   |
+| debug  | 是否开启debug模式,仅android端有效                     | bool                | false     |
+| minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5   |
+| maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
+| mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
+  
+**onPageChanged** 图片切换时调用
+  
+**onClose** gallery关闭时调用
+
