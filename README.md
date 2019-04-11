@@ -68,13 +68,13 @@ KPGallery.showGallery({ images },
 | images  | 图片数据数组，见下面的`image`说明                       | array | 无     |
 | index | 初始显示第几张         | number                  | 0      |
 | debug  | 是否开启debug模式,仅android端有效                     | bool                | 无     |
-| minScale     | 最小缩放比例，为0表示由自动控制 | number                 | 0   |
-| maxScale     | 最大缩放比例，为0表示由自动控制 | number                 | 0   |
+| minScale     | 最小缩放比例，为0表示自动控制 | number                 | 0   |
+| maxScale     | 最大缩放比例，为0表示自动控制 | number                 | 0   |
 
-**image** 说明
+**image** 单个图片说明
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
 | source  | 与react-native 的 Image source一致                       |  | 无     |
-| minScale     | 最小缩放比例，为0表示由自动控制 | number                 | 0   |
-| maxScale     | 最大缩放比例，为0表示由自动控制 | number                 | 0   |
+| minScale     | 最小缩放比例，为0表示自动 | number                 | 0   |
+| maxScale     | 最大缩放比例，为0表示自动 | number                 | 0   |
