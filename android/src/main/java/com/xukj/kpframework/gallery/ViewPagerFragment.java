@@ -96,7 +96,8 @@ public class ViewPagerFragment extends Fragment {
             @Override
             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
 
-                switch (image.getMode()) {
+                String mode = image.getMode() != null ? image.getMode() : "inside";
+                switch (mode) {
                     case "custom":
                         setCustomMode(resource, image);
                         break;
