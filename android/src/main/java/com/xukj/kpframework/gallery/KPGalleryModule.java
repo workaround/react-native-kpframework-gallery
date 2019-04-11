@@ -119,6 +119,10 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
                 image.setMode(map.getString(KPPHOTO_GALLERY_KEY_MODE));
             }
 
+            if (map.hasKey(KPPHOTO_GALLERY_KEY_DEBUG)) {
+                image.setDebug(map.getBoolean(KPPHOTO_GALLERY_KEY_DEBUG));
+            }
+
             this.images.add(image);
         }
     }

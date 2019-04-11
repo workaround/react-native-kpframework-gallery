@@ -102,10 +102,10 @@ public class ViewPagerFragment extends Fragment {
                         setCustomMode(resource, image);
                         break;
                     case "crop":
-                        setInsideMode(resource, image);
+                        setCropMode(resource, image);
                         break;
                     default:
-                        setCropMode(resource, image);
+                        setInsideMode(resource, image);
                         break;
                 }
 
@@ -132,12 +132,8 @@ public class ViewPagerFragment extends Fragment {
      */
     private void setCropMode(File resource, PhotoImage image) {
         float scale = ScreenUtils.getImageScaleForScreenWidth(getContext(), resource);
-        if (scale < 1) {
-            // 原图比屏幕宽
-            mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
-            mImageView.setMinScale(scale);
-        }
-
+        mImageView.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CUSTOM);
+        mImageView.setMinScale(scale);
         mImageView.setDebug(image.isDebug());
         mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
     }
