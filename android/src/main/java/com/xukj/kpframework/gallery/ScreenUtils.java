@@ -16,6 +16,13 @@ import java.io.FileOutputStream;
 
 public class ScreenUtils {
 
+    /** 获取屏幕信息 */
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics;
+    }
+
     /** 获取屏幕密度 */
     public static float getScreenDensity(Context context) {
         return getDisplayMetrics(context).density;
@@ -69,16 +76,12 @@ public class ScreenUtils {
         savePic(takeShot, strFileName);
     }
 
-    /**
-     * 获取图片相对屏幕宽度缩放比例
-     * @param context
-     * @param imageFile
-     * @return
-     */
-    public static float getImageScaleForScreenWidth(Context context, File imageFile) {
-        int screenWidth = getDisplayMetrics(context).widthPixels;
-        int imageWidth = getImageFileWidth(imageFile);
-        return screenWidth * 1f / imageWidth;
+    // 计算图片文件宽度
+    public static BitmapFactory.Options getImageFileOptions(File file) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+        return options;
     }
 
     /**
@@ -114,14 +117,6 @@ public class ScreenUtils {
         return b;
     }
 
-
-    private static DisplayMetrics getDisplayMetrics(Context context) {
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics;
-    }
-
-
     // 保存到sdcard
     private static void savePic(Bitmap b, String strFileName) {
         FileOutputStream fos = null;
@@ -137,13 +132,4 @@ public class ScreenUtils {
             e.printStackTrace();
         }
     }
-
-    // 计算图片文件宽度
-    private static int getImageFileWidth(File file) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-        return options.outWidth;
-    }
-
 }
