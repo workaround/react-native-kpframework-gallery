@@ -24,6 +24,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     private static final String KPPHOTO_GALLERY_KEY_MAXSCALE = "maxScale";
     private static final String KPPHOTO_GALLERY_KEY_IMAGE_URI = "uri";
     private static final String KPPHOTO_GALLERY_KEY_DEBUG = "debug";
+    private static final String KPPHOTO_GALLERY_KEY_MODE = "mode";
 
     public static final String KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
     public static final String KPPHOTO_GALLERY_EVENT_ONCLOSE = "KPPHOTO_GALLERY_EVENT_ONCLOSE";
@@ -33,8 +34,9 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     // 图片地址
     private ArrayList<PhotoImage> images = new ArrayList<>();
     private int index = 0;
-    private float minScale = 0;  // 0 表示使用默认配置
-    private float maxScale = 0;  // 0 表示使用默认配置
+    private float minScale = (float) 0.5;
+    private float maxScale = 2;
+    private String mode; // 模式
     private boolean debug = false;
     private ReadableMap options;
 
@@ -78,6 +80,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         minScale = options.hasKey(KPPHOTO_GALLERY_KEY_MINSCALE) ? (float) options.getDouble(KPPHOTO_GALLERY_KEY_MINSCALE) : minScale;
         maxScale = options.hasKey(KPPHOTO_GALLERY_KEY_MAXSCALE) ? (float) options.getDouble(KPPHOTO_GALLERY_KEY_MAXSCALE) : maxScale;
         debug = options.hasKey(KPPHOTO_GALLERY_KEY_DEBUG) ? options.getBoolean(KPPHOTO_GALLERY_KEY_DEBUG) : debug;
+        mode = options.hasKey(KPPHOTO_GALLERY_KEY_MODE) ? options.getString(KPPHOTO_GALLERY_KEY_MODE) : mode;
 
         images.clear();
         if (options.hasKey(KPPHOTO_GALLERY_KEY_IMAGES)) {
@@ -99,15 +102,25 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
             image.setMinScale(minScale);
             image.setMaxScale(maxScale);
             image.setDebug(debug);
+            image.setMode(mode);
 
             if (map.hasKey(KPPHOTO_GALLERY_KEY_MINSCALE)) {
-                // 如果单个页面设置了缩放，则单独设置缩放
+                // 如果单个image设置了缩放，则使用单独设置的值
                 image.setMinScale((float) map.getDouble(KPPHOTO_GALLERY_KEY_MINSCALE));
             }
 
             if (map.hasKey(KPPHOTO_GALLERY_KEY_MAXSCALE)) {
-                // 如果单个页面设置了缩放，则单独设置缩放
+                // 如果单个image设置了缩放，则使用单独设置的值
                 image.setMaxScale((float) map.getDouble(KPPHOTO_GALLERY_KEY_MAXSCALE));
+            }
+
+            if (map.hasKey(KPPHOTO_GALLERY_KEY_MODE)) {
+                // 如果单个image设置了模式，则使用单独设置的值
+                image.setMode(map.getString(KPPHOTO_GALLERY_KEY_MODE));
+            }
+
+            if (map.hasKey(KPPHOTO_GALLERY_KEY_DEBUG)) {
+                image.setDebug(map.getBoolean(KPPHOTO_GALLERY_KEY_DEBUG));
             }
 
             this.images.add(image);
