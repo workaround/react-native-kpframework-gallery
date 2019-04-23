@@ -83,6 +83,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+ios/pods
 
 # Android/IntelliJ
 #
