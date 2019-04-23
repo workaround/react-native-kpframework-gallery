@@ -84,6 +84,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/pods
+example/ios/pods
 
 # Android/IntelliJ
 #
