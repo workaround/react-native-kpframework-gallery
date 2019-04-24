@@ -8,22 +8,40 @@
 
 ## 原生库
 
-- Android [subsampling-scale-image-view](https://github.com/davemorrissey/subsampling-scale-image-view)
-- iOS 暂未支持
-
+- Android  
+基于[subsampling-scale-image-view](https://github.com/davemorrissey/subsampling-scale-image-view)修改
+- iOS  
+基于[YBImageBrowser](https://github.com/indulgeIn/YBImageBrowser)修改
+  
 ## 安装方式
 
-1. 添加库
+#### 第一步: 添加库
 
 ```
 yarn add react-native-kpframework-gallery
 ```
 
-2. 链接原生
+#### 第二步: 链接原生
 
 ```
 react-native link react-native-kpframework-gallery
 ```
+
+#### 第三步
+  
+**android**  
+Gradle >= 3.1.4 (android/build.gradle)
+Android SDK >= 26 (android/app/build.gradle)
+  
+**iOS**  
+1. Cocoapods(推荐)  
+暂未支持
+
+2. 手动安装  
+Click on project General tab
+Under Deployment Info set Deployment Target to 8.0
+Under Embedded Binaries click + and add KPGallery.framework
+
 
 ## 使用
 
@@ -80,7 +98,7 @@ KPGallery.showGallery({ images },
 `crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
 `custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`
 
-**image** 单个图片属性
+**image** 单个图片属性(仅支持**android**)
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
