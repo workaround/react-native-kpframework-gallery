@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		39C38A432270670C00D291BE /* Build KPGallery */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 39C38A462270670C00D291BE /* Build configuration list for PBXAggregateTarget "Build KPGallery" */;
+			buildPhases = (
+				39C38A472270672700D291BE /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Build KPGallery";
+			productName = "Build KPGallery";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		399D802C226EF533008D8765 /* KPGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 399D802A226EF533008D8765 /* KPGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		399D80BB226EF5BE008D8765 /* KPNativeBrowserToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D8033226EF5BD008D8765 /* KPNativeBrowserToolBar.m */; };
@@ -622,6 +636,9 @@
 					399D8026226EF533008D8765 = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					39C38A432270670C00D291BE = {
+						CreatedOnToolsVersion = 10.1;
+					};
 				};
 			};
 			buildConfigurationList = 399D8021226EF533008D8765 /* Build configuration list for PBXProject "KPGallery" */;
@@ -638,6 +655,7 @@
 			projectRoot = "";
 			targets = (
 				399D8026226EF533008D8765 /* KPGallery */,
+				39C38A432270670C00D291BE /* Build KPGallery */,
 			);
 		};
 /* End PBXProject section */
@@ -652,6 +670,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39C38A472270672700D291BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"KPGallery\"\nDEST_DIR=\"$(cd ../$(SRCROOT) && pwd)/KPNativeGallerySDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"$DEST_DIR/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"$DEST_DIR/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to Desktop.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"$DEST_DIR/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"$DEST_DIR/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		399D8023226EF533008D8765 /* Sources */ = {
@@ -773,7 +811,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -829,7 +867,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -889,6 +927,22 @@
 			};
 			name = Release;
 		};
+		39C38A442270670C00D291BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		39C38A452270670C00D291BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -906,6 +960,15 @@
 			buildConfigurations = (
 				399D8030226EF533008D8765 /* Debug */,
 				399D8031226EF533008D8765 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39C38A462270670C00D291BE /* Build configuration list for PBXAggregateTarget "Build KPGallery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39C38A442270670C00D291BE /* Debug */,
+				39C38A452270670C00D291BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
