@@ -18,12 +18,12 @@
 #define KPPHOTO_GALLERY_KEY_MAXSCALE @"maxScale"
 #define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 #define KPPHOTO_GALLERY_KEY_MODE @"mode"
-#define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
-#define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 
 #define KPMODE_INSIDE @"inside"
 #define KPMODE_CROP @"crop"
 #define KPMODE_CUSTOM @"custom"
+
+#define KPDEFAULT_MAXSCALE 2
 
 @interface KPNativeGallery () <KPImageBrowserDelegate>
 
@@ -65,6 +65,7 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
 }
 
 - (void)setGlobalConfiguration {
+    // 显示模式
     if ([KPMODE_CROP isEqualToString:self.mode]) {
         [KPImageBrowseCellData setGlobalVerticalfillType:YBImageBrowseFillTypeUnknown];
         [KPImageBrowseCellData setGlobalHorizontalfillType:YBImageBrowseFillTypeFullWidth];
@@ -90,6 +91,10 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
         if (uri == nil) return;
         KPImageBrowseCellData *data = [KPImageBrowseCellData new];
         data.url = [NSURL URLWithString:uri];
+        if ([KPMODE_CUSTOM isEqualToString:self.mode]) {
+            // 设置缩放比例
+            data.maxZoomScale = self.maxScale > 1 ? self.maxScale : KPDEFAULT_MAXSCALE;
+        }
         [dataArray addObject:data];
     }];
     
