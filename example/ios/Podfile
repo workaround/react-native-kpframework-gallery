@@ -19,6 +19,8 @@ target 'RNDemo02' do
     'RCTBlob',
   ]
 
+  pod 'KPNativeGallery', :path => '../node_modules/react-native-kpframework-gallery'
+
 end
 
 # very important to have, unless you removed React dependencies for Libraries

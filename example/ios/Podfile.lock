@@ -1,4 +1,8 @@
 PODS:
+  - KPGallery (0.0.1)
+  - KPNativeGallery (0.0.4):
+    - KPGallery
+    - React/Core
   - React/Core (0.56.1):
     - yoga (= 0.56.1.React)
   - React/fishhook (0.56.1)
@@ -30,6 +34,7 @@ PODS:
   - yoga (0.56.1.React)
 
 DEPENDENCIES:
+  - KPNativeGallery (from `../node_modules/react-native-kpframework-gallery`)
   - React/Core (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
   - React/RCTAnimation (from `../node_modules/react-native`)
@@ -44,16 +49,24 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KPGallery
+
 EXTERNAL SOURCES:
+  KPNativeGallery:
+    :path: "../node_modules/react-native-kpframework-gallery"
   React:
     :path: "../node_modules/react-native"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
+  KPGallery: 24ceddbf53359ec0bc82778e3da74fe5f4c8d742
+  KPNativeGallery: 4bb6361a76d3eb61aff99da5a33e226bd8a3cf43
   React: 5762f784e03a9bad2567eead64c74de9335029e3
   yoga: b9ed4d1df8b304449cc4d7f72c268eeaac2bbf85
 
-PODFILE CHECKSUM: b1dc40d34912d589dc8f6077b77880fd76559d0c
+PODFILE CHECKSUM: 4c51aab9818ac0acaba3fef4765d1afcbd572f9f
 
 COCOAPODS: 1.7.0.beta.3

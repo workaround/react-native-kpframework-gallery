@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/kpReactComponent/RNKPGallery.git", :tag => "#{s.version}" }
 
   s.source_files  = "KPGallery/**/*.{h,m}"
-  s.exclude_files = "KPGallery/SDWebImage/**/*", "KPGallery/YYImage/**/*"
+  # s.exclude_files = "KPGallery/SDWebImage/**/*", "KPGallery/YYImage/**/*"
 
   s.resources = "KPGallery/YBImageBrowser/YBImageBrowser.bundle"
 
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'SDWebImage', '~>5.0.0'
-  s.dependency 'YYImage'
+  # s.dependency 'SDWebImage', '~>5.0.0'
+  # s.dependency 'YYImage'
 
 end
