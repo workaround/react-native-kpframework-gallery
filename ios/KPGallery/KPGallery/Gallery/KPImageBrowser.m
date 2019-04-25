@@ -65,6 +65,7 @@
     if (self.kpDelegate && [self.kpDelegate respondsToSelector:@selector(imageBrowserClose)]) {
         [self.kpDelegate imageBrowserClose];
     }
+    NSLog(@"dealloc");
 }
 
 @end

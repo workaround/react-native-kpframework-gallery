@@ -9,12 +9,17 @@
 #import "KPNativeGallery.h"
 #import <KPGallery/KPGallery.h>
 
+#define KPPHOTO_GALLERY_EVENT_ONPAGECHANGED @"KPPHOTO_GALLERY_EVENT_ONPAGECHANGED"
+#define KPPHOTO_GALLERY_EVENT_ONCLOSE @"KPPHOTO_GALLERY_EVENT_ONCLOSE"
+
 #define KPPHOTO_GALLERY_KEY_IMAGES @"images"
 #define KPPHOTO_GALLERY_KEY_INDEX @"index"
 #define KPPHOTO_GALLERY_KEY_DEBUG @"debug"
 #define KPPHOTO_GALLERY_KEY_MAXSCALE @"maxScale"
 #define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 #define KPPHOTO_GALLERY_KEY_MODE @"mode"
+#define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
+#define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 
 #define KPMODE_INSIDE @"inside"
 #define KPMODE_CROP @"crop"
@@ -38,6 +43,11 @@
 RCT_EXPORT_MODULE();
 
 @synthesize bridge = _bridge;
+
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[KPPHOTO_GALLERY_EVENT_ONPAGECHANGED, KPPHOTO_GALLERY_EVENT_ONCLOSE];
+}
 
 RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
     
@@ -72,7 +82,7 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
 - (void)setImagesConfiguration {
     
     if (self.images == nil || self.images.count <= 0)
-        return;
+    return;
     
     NSMutableArray *dataArray = [NSMutableArray new];
     [self.images enumerateObjectsUsingBlock:^(NSDictionary *image, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -96,12 +106,13 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
 
 - (void)imageBrowser:(KPImageBrowser *)browser pageIndexChanged:(NSUInteger)index
 {
-    NSLog(@"index %ld", index);
+    [self sendEventWithName:KPPHOTO_GALLERY_EVENT_ONPAGECHANGED
+                       body:@{KPPHOTO_GALLERY_KEY_INDEX: @(index)}];
 }
 
 - (void)imageBrowserClose
 {
-    NSLog(@"close");
+    [self sendEventWithName:KPPHOTO_GALLERY_EVENT_ONCLOSE body:nil];
 }
 
 @end
