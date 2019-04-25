@@ -4,7 +4,7 @@
  * @description Gallery.ios
  */
 import React from 'react';
-import { DeviceEventEmitter, NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 const KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = 'KPPHOTO_GALLERY_EVENT_ONPAGECHANGED';
@@ -12,14 +12,14 @@ const KPPHOTO_GALLERY_EVENT_ONCLOSE = 'KPPHOTO_GALLERY_EVENT_ONCLOSE';
 
 class GalleryControl {
     constructor() {
-        this.onPageChangedListener = DeviceEventEmitter.addListener(
+        this.onPageChangedListener = NativeEventEmitter.addListener(
             KPPHOTO_GALLERY_EVENT_ONPAGECHANGED,
             value => {
                 if (this.onPageChanged) this.onPageChanged(value.index);
             }
         );
 
-        this.onCloseListener = DeviceEventEmitter.addListener(
+        this.onCloseListener = NativeEventEmitter.addListener(
             KPPHOTO_GALLERY_EVENT_ONCLOSE,
             () => {
                 if (this.onClose) this.onClose();
