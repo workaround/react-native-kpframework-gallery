@@ -10,16 +10,19 @@ const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSou
 const KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = 'KPPHOTO_GALLERY_EVENT_ONPAGECHANGED';
 const KPPHOTO_GALLERY_EVENT_ONCLOSE = 'KPPHOTO_GALLERY_EVENT_ONCLOSE';
 
+const KPNativeGallery = NativeModules.KPNativeGallery;
+const NativeEventModule = new NativeEventEmitter(KPNativeGallery)
+
 class GalleryControl {
     constructor() {
-        this.onPageChangedListener = NativeEventEmitter.addListener(
+        this.onPageChangedListener = NativeEventModule.addListener(
             KPPHOTO_GALLERY_EVENT_ONPAGECHANGED,
             value => {
                 if (this.onPageChanged) this.onPageChanged(value.index);
             }
         );
 
-        this.onCloseListener = NativeEventEmitter.addListener(
+        this.onCloseListener = NativeEventModule.addListener(
             KPPHOTO_GALLERY_EVENT_ONCLOSE,
             () => {
                 if (this.onClose) this.onClose();
@@ -67,7 +70,7 @@ function showGallery(options = {}, onPageChanged = null, onClose = null) {
     control.addOnPageChanged(onPageChanged);
     control.addOnClose(onClose);
     
-    NativeModules.KPNativeGallery.showGallery(values);
+    KPNativeGallery.showGallery(values);
 }
 
 export default {

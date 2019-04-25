@@ -4,22 +4,25 @@
  * @description KPGallery图片浏览器
  */
 import React from 'react';
-import { DeviceEventEmitter, NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules } from 'react-native';
 const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
 const KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = 'KPPHOTO_GALLERY_EVENT_ONPAGECHANGED';
 const KPPHOTO_GALLERY_EVENT_ONCLOSE = 'KPPHOTO_GALLERY_EVENT_ONCLOSE';
 
+const KPNativeGallery = NativeModules.KPGallery;
+const NativeEventModule = new NativeEventEmitter(KPNativeGallery)
+
 class GalleryControl {
     constructor() {
-        this.onPageChangedListener = DeviceEventEmitter.addListener(
+        this.onPageChangedListener = NativeEventModule.addListener(
             KPPHOTO_GALLERY_EVENT_ONPAGECHANGED,
             value => {
                 if (this.onPageChanged) this.onPageChanged(value.index);
             }
         );
 
-        this.onCloseListener = DeviceEventEmitter.addListener(
+        this.onCloseListener = NativeEventModule.addListener(
             KPPHOTO_GALLERY_EVENT_ONCLOSE,
             () => {
                 if (this.onClose) this.onClose();
