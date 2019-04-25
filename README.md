@@ -35,7 +35,43 @@ Android SDK >= 26 (android/app/build.gradle)
   
 **iOS**  
 1. Cocoapods(推荐)  
-暂未支持
+修改Podfile文件，如下:
+```ruby
+platform :ios, '9.0'
+
+target '<project_name>' do
+  # this is very important to have!
+  rn_path = '../node_modules/react-native'
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket'
+  ]
+
+  pod 'KPNativeGallery', :path => '../node_modules/react-native-kpframework-gallery'
+end
+
+# very important to have, unless you removed React dependencies for Libraries 
+# and you rely on Cocoapods to manage it
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end
+```  
+执行 `pod install`
+
 
 2. 手动安装  
 Click on project General tab
@@ -83,22 +119,18 @@ KPGallery.showGallery({ images },
 
 - showGallery(options, onPageChanged, onClose);  
 
-**options** 参数说明  
+###1. options 参数说明  
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
 | images  | 图片数据数组，见下面的`image`说明                       | array | 无     |
 | index | 初始显示第几张         | number                  | 0      |
 | debug  | 是否开启debug模式,仅android端有效                     | bool                | false     |
-| minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5   |
+| minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5 / iOS固定为1   |
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
   
-`inside`缩放图片至全部显示；  
-`crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
-`custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`
-
-**image** 单个图片属性(仅支持**android**)
+####image 单个图片属性(仅支持**android**)
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
@@ -108,7 +140,25 @@ KPGallery.showGallery({ images },
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
   
-**onPageChanged** 图片切换时调用
-  
-**onClose** gallery关闭时调用
+#### 说明
+`inside`缩放图片至全部显示；  
+`crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
+`custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`  
 
+#### 平台差异  
+  
+- iOS单个image仅支持设置`source`
+- iOS不支持`minScale`，固定为1
+- iOS不支持`debug`调试模式
+  
+###2. onPageChanged 
+图片切换时调用
+```jsx
+(index) => {}  
+```
+  
+###3. onClose 
+gallery关闭时调用
+```jsx
+() => {}
+```
