@@ -235,8 +235,14 @@ static BOOL _shouldDecodeAsynchronously = YES;
     
     self.dataState = YBImageBrowseCellDataStateIsDownloading;
     self->_downloadToken = [YBIBWebImageManager downloadImageWithURL:self.url progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-        CGFloat value = receivedSize * 1.0 / expectedSize ?: 0;
-        self->_downloadProgress = value;
+        
+        if (expectedSize <= 0) {
+            // do nothing
+        }
+        else {
+            CGFloat value = receivedSize * 1.0 / expectedSize ?: 0;
+            self->_downloadProgress = value;
+        }
         
         YBIB_GET_QUEUE_MAIN_ASYNC(^{
             self.dataState = YBImageBrowseCellDataStateDownloadProcess;
