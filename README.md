@@ -30,8 +30,8 @@ react-native link react-native-kpframework-gallery
 #### 第三步
   
 **android**  
-Gradle >= 3.1.4 (android/build.gradle)
-Android SDK >= 26 (android/app/build.gradle)
+Gradle >= 3.1.4 (android/build.gradle)  
+Android SDK >= 26 (android/app/build.gradle)  
   
 **iOS**  
 1. Cocoapods(推荐)  
@@ -74,9 +74,9 @@ end
 
 
 2. 手动安装  
-Click on project General tab
-Under Deployment Info set Deployment Target to 8.0
-Under Embedded Binaries click + and add KPGallery.framework
+Click on project General tab  
+Under Deployment Info set Deployment Target to 8.0  
+Under Embedded Binaries click + and add KPGallery.framework  
 
 
 ## 使用
@@ -119,7 +119,7 @@ KPGallery.showGallery({ images },
 
 - showGallery(options, onPageChanged, onClose);  
 
-###1. options 参数说明  
+### 1. options 参数说明  
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
@@ -130,7 +130,7 @@ KPGallery.showGallery({ images },
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
   
-####image 单个图片属性(仅支持**android**)
+#### image 单个图片属性(仅支持**android**)
 
 | 属性     | 说明                           | 类型                    | 默认值 |
 | -------- | ------------------------------ | ----------------------- | ------ |
@@ -151,13 +151,13 @@ KPGallery.showGallery({ images },
 - iOS不支持`minScale`，固定为1
 - iOS不支持`debug`调试模式
   
-###2. onPageChanged 
+### 2. onPageChanged 
 图片切换时调用
 ```jsx
 (index) => {}  
 ```
   
-###3. onClose 
+### 3. onClose 
 gallery关闭时调用
 ```jsx
 () => {}
