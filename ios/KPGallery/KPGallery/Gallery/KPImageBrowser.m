@@ -12,6 +12,7 @@
 @interface KPImageBrowser ()<YBImageBrowserDelegate>
 
 @property (nonatomic, strong) KPNativeBrowserToolBar *kpToolBar;
+@property (nonatomic, assign) UIInterfaceOrientation kpOrientationBefore;
 
 @end
 
@@ -23,17 +24,12 @@
     if (self) {
         self.toolBars = @[self.kpToolBar];
         self.delegate = self;
+        self.kpOrientationBefore = UIInterfaceOrientationUnknown;
     }
     return self;
 }
 
 #pragma mark - delegate
-
-//- (void)yb_imageBrowser:(YBImageBrowser *)imageBrowser respondsToLongPress:(UILongPressGestureRecognizer *)longPress
-//{
-//    // do nothing
-//    // 屏蔽长按事件
-//}
 
 - (void)yb_imageBrowser:(YBImageBrowser *)imageBrowser pageIndexChanged:(NSUInteger)index data:(id<YBImageBrowserCellDataProtocol>)data
 {
@@ -47,6 +43,59 @@
 
 - (void)yb_imageBrowserViewDismiss:(YBImageBrowserView *)browserView {
     // 屏蔽单击关闭操作
+}
+
+- (void)show {
+    // 重写父类方法，增加横竖屏旋转操作
+    self.kpOrientationBefore = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if ([KPORIENTATION_PORTRAIT isEqualToString:self.kpOrientation]) {
+        // 竖屏旋转
+        [self changeOrientation:UIInterfaceOrientationPortrait];
+    }
+    else if ([KPORIENTATION_LANDSCAPE isEqualToString:self.kpOrientation]) {
+        // 横屏旋转
+        [self changeOrientation:UIInterfaceOrientationLandscapeRight];
+    }
+    else {
+        // 自动不旋转
+    }
+    
+    [super show];
+}
+
+- (void)hide {
+    // 重写父类方法，关闭时需要重置横竖屏
+    if (self.kpOrientationBefore != [[UIApplication sharedApplication] statusBarOrientation]) {
+        [self changeOrientation:self.kpOrientationBefore];
+    }
+    [super hide];
+}
+
+#pragma mark - private
+
+// 旋转屏幕
+- (void)changeOrientation:(UIInterfaceOrientation)destOrientation {
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        
+        // 设置支持横屏还是竖屏
+        if (UIInterfaceOrientationIsPortrait(destOrientation)) {
+            self.supportedOrientations = UIInterfaceOrientationMaskPortrait;
+        }
+        else if (UIInterfaceOrientationIsLandscape(destOrientation)) {
+            self.supportedOrientations = UIInterfaceOrientationMaskLandscape;
+        }
+        
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        NSInteger val = destOrientation;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+        
+        [UIViewController attemptRotationToDeviceOrientation];
+    }
 }
 
 #pragma mark - getter

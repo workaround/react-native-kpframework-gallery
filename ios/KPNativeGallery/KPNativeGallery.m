@@ -18,12 +18,11 @@
 #define KPPHOTO_GALLERY_KEY_MAXSCALE @"maxScale"
 #define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 #define KPPHOTO_GALLERY_KEY_MODE @"mode"
+#define KPPHOTO_GALLERY_KEY_ORINENTATION @"orientation"
 
 #define KPMODE_INSIDE @"inside"
 #define KPMODE_CROP @"crop"
 #define KPMODE_CUSTOM @"custom"
-
-#define KPDEFAULT_MAXSCALE 2
 
 @interface KPNativeGallery () <KPImageBrowserDelegate>
 
@@ -33,6 +32,7 @@
 @property (nonatomic, assign) float minScale;
 @property (nonatomic, strong) NSString *mode;
 @property (nonatomic, assign) BOOL debug;
+@property (nonatomic, strong) NSString *orinentation;
 
 @property (nonatomic, strong) NSDictionary *options;
 
@@ -49,7 +49,8 @@ RCT_EXPORT_MODULE();
     return @[KPPHOTO_GALLERY_EVENT_ONPAGECHANGED, KPPHOTO_GALLERY_EVENT_ONCLOSE];
 }
 
-RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
+RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options)
+{
     
     NSLog(@"options %@", options);
     self.options = options;
@@ -59,13 +60,14 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
     self.maxScale = [[options valueForKey:KPPHOTO_GALLERY_KEY_MAXSCALE] floatValue];
     self.debug = [[options valueForKey:KPPHOTO_GALLERY_KEY_DEBUG] boolValue];
     self.mode = [options valueForKey:KPPHOTO_GALLERY_KEY_MODE];
+    self.orinentation = [options valueForKey:KPPHOTO_GALLERY_KEY_ORINENTATION];
     
     [self setGlobalConfiguration];
     [self setImagesConfiguration];
 }
 
-- (void)setGlobalConfiguration {
-    // 显示模式
+- (void)setGlobalConfiguration
+{
     if ([KPMODE_CROP isEqualToString:self.mode]) {
         [KPImageBrowseCellData setGlobalVerticalfillType:YBImageBrowseFillTypeUnknown];
         [KPImageBrowseCellData setGlobalHorizontalfillType:YBImageBrowseFillTypeFullWidth];
@@ -80,10 +82,10 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
     }
 }
 
-- (void)setImagesConfiguration {
-    
+- (void)setImagesConfiguration
+{
     if (self.images == nil || self.images.count <= 0)
-    return;
+        return;
     
     NSMutableArray *dataArray = [NSMutableArray new];
     [self.images enumerateObjectsUsingBlock:^(NSDictionary *image, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -91,10 +93,6 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
         if (uri == nil) return;
         KPImageBrowseCellData *data = [KPImageBrowseCellData new];
         data.url = [NSURL URLWithString:uri];
-        if ([KPMODE_CUSTOM isEqualToString:self.mode]) {
-            // 设置缩放比例
-            data.maxZoomScale = self.maxScale > 1 ? self.maxScale : KPDEFAULT_MAXSCALE;
-        }
         [dataArray addObject:data];
     }];
     
@@ -103,6 +101,7 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options) {
         browser.dataSourceArray = dataArray;
         browser.currentIndex = self.index;
         browser.kpDelegate = self;
+        browser.kpOrientation = self.orinentation;
         [browser show];
     });
 }

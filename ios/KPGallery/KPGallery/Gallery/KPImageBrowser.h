@@ -9,11 +9,17 @@
 #import "YBImageBrowser.h"
 #import "KPImageBrowserDelegate.h"
 
+#define KPORIENTATION_AUTO @"auto"
+#define KPORIENTATION_PORTRAIT @"portrait"
+#define KPORIENTATION_LANDSCAPE @"landscape"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KPImageBrowser : YBImageBrowser
 
 @property (nonatomic, weak) _Nullable id<KPImageBrowserDelegate> kpDelegate;
+
+@property (nonatomic, assign) NSString *kpOrientation;
 
 @end
 

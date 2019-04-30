@@ -35,7 +35,10 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* RNDemo02Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNDemo02Tests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		396DC51622783E80002D1F0C /* KPGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396DC51522783E80002D1F0C /* KPGallery.framework */; };
+		396DC51722783E80002D1F0C /* KPGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 396DC51522783E80002D1F0C /* KPGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42B619C9290CBFDD1A41480B /* libPods-RNDemo02.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06E54E7FE6FBD3296D9E8497 /* libPods-RNDemo02.a */; };
+		4A25DF92E6494A51A4E2621A /* libKPNativeGallery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9035AB620E52476BB8BA5EA5 /* libKPNativeGallery.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -189,6 +192,13 @@
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
 		};
+		396DC51322783E6D002D1F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9336C7A6AFF4E3CB4F7BDF6 /* KPNativeGallery.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 399D8170226EFE62008D8765;
+			remoteInfo = KPNativeGallery;
+		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -317,6 +327,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		396DC4D122783DAB002D1F0C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				396DC51722783E80002D1F0C /* KPGallery.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -341,11 +365,13 @@
 		2D02E47B1E0B4A5D006451C7 /* RNDemo02-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RNDemo02-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* RNDemo02-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RNDemo02-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		396DC51522783E80002D1F0C /* KPGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KPGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		73BDCB30B4B34E30B849E342 /* libRNPhotoView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNPhotoView.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9035AB620E52476BB8BA5EA5 /* libKPNativeGallery.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libKPNativeGallery.a; sourceTree = "<group>"; };
 		A052684A47ED68BE5A5BC22D /* Pods-RNDemo02.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNDemo02.release.xcconfig"; path = "Pods/Target Support Files/Pods-RNDemo02/Pods-RNDemo02.release.xcconfig"; sourceTree = "<group>"; };
+		A9336C7A6AFF4E3CB4F7BDF6 /* KPNativeGallery.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KPNativeGallery.xcodeproj; path = "../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		CE6F30A4F49383C53046093C /* Pods-RNDemo02.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNDemo02.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNDemo02/Pods-RNDemo02.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -373,10 +399,12 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
+				396DC51622783E80002D1F0C /* KPGallery.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				42B619C9290CBFDD1A41480B /* libPods-RNDemo02.a in Frameworks */,
+				4A25DF92E6494A51A4E2621A /* libKPNativeGallery.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,9 +562,17 @@
 		39264E5C22598F2A009D18B7 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				73BDCB30B4B34E30B849E342 /* libRNPhotoView.a */,
+				9035AB620E52476BB8BA5EA5 /* libKPNativeGallery.a */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		396DC51022783E6D002D1F0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				396DC51422783E6D002D1F0C /* libKPNativeGallery.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		46B7AB9BD9724947B98B92FE /* Resources */ = {
@@ -579,6 +615,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				A9336C7A6AFF4E3CB4F7BDF6 /* KPNativeGallery.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -595,6 +632,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				396DC51522783E80002D1F0C /* KPGallery.framework */,
 				13B07FAE1A68108700A75B9A /* RNDemo02 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RNDemo02Tests */,
@@ -668,7 +706,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				E1202E65CC90B44C3FB310F2 /* [CP] Copy Pods Resources */,
+				396DC4D122783DAB002D1F0C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -755,6 +793,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 396DC51022783E6D002D1F0C /* Products */;
+					ProjectRef = A9336C7A6AFF4E3CB4F7BDF6 /* KPNativeGallery.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -946,6 +988,13 @@
 			fileType = archive.ar;
 			path = "libprivatedata-tvOS.a";
 			remoteRef = 2DF0FFEC2056DD460020B375 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		396DC51422783E6D002D1F0C /* libKPNativeGallery.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKPNativeGallery.a;
+			remoteRef = 396DC51322783E6D002D1F0C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1157,24 +1206,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E1202E65CC90B44C3FB310F2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNDemo02/Pods-RNDemo02-resources.sh",
-				"${PODS_ROOT}/KPGallery/KPGallery/YBImageBrowser/YBImageBrowser.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YBImageBrowser.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNDemo02/Pods-RNDemo02-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1252,11 +1283,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = RNDemo02Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1275,11 +1310,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = RNDemo02Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1303,6 +1342,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = RNDemo02/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1330,6 +1370,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = RNDemo02/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1360,10 +1401,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = "RNDemo02-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1392,10 +1437,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = "RNDemo02-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1423,10 +1472,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = "RNDemo02-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1454,10 +1507,14 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-photo-view/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-kpframework-gallery/ios/KPNativeGallery/**",
 				);
 				INFOPLIST_FILE = "RNDemo02-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

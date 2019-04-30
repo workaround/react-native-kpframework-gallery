@@ -32,4 +32,10 @@
   return YES;
 }
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+  UIInterfaceOrientationMaskAllButUpsideDown
+  return UIInterfaceOrientationMaskLandscape;
+}
+
 @end

@@ -129,6 +129,7 @@ KPGallery.showGallery({ images },
 | minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5 / iOS固定为1   |
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
+| orientation     | 横竖屏`auto` `portrait` `landscape` | string                 | auto   |
   
 #### image 单个图片属性(仅支持**android**)
 
@@ -139,17 +140,7 @@ KPGallery.showGallery({ images },
 | minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5   |
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
-  
-#### 说明
-`inside`缩放图片至全部显示；  
-`crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
-`custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`  
 
-#### 平台差异  
-  
-- iOS单个image仅支持设置`source`
-- iOS不支持`minScale`，固定为1
-- iOS不支持`debug`调试模式
   
 ### 2. onPageChanged 
 图片切换时调用
@@ -162,3 +153,30 @@ gallery关闭时调用
 ```jsx
 () => {}
 ```
+
+### 4. 其他说明
+
+  
+#### mode  
+`inside`缩放图片至全部显示；  
+`crop`缩放图片宽度至屏幕宽度，如果图片比屏幕窄，则有多宽显示多宽；  
+`custom`指定了该模式，则需要提供`minScale`和`maxScale`，图片初始缩放比例为`minScale`  
+  
+#### orientation  
+iOS端必须在 AppDelegate.m 中指定支持的横竖屏模式  
+```objc
+// portrait - UIInterfaceOrientationMaskPortrait
+// landscape - UIInterfaceOrientationMaskLandscape
+// auto - UIInterfaceOrientationMaskAllButUpsideDown
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
+```
+
+
+### 5. 注意事项  
+  
+- iOS单个image仅支持设置`source`
+- iOS不支持`minScale`，固定为1
+- iOS不支持`debug`调试模式

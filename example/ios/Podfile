@@ -21,7 +21,7 @@ target 'RNDemo02' do
 
 
 
-  pod 'KPNativeGallery', :path => '../node_modules/react-native-kpframework-gallery'
+
 
 end
 

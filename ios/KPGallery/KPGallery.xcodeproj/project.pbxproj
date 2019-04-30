@@ -399,6 +399,7 @@
 		399D806F226EF5BD008D8765 /* YBImageBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				399D80AC226EF5BE008D8765 /* YBImageBrowser.h */,
 				399D8070226EF5BD008D8765 /* YBImageBrowser.m */,
 				399D8071226EF5BD008D8765 /* Protocol */,
 				399D8078226EF5BD008D8765 /* VideoBrowse */,
@@ -406,7 +407,6 @@
 				399D808B226EF5BD008D8765 /* ImageBrowse */,
 				399D8095226EF5BD008D8765 /* Helper */,
 				399D80A6226EF5BE008D8765 /* Base */,
-				399D80AC226EF5BE008D8765 /* YBImageBrowser.h */,
 				399D80AD226EF5BE008D8765 /* YBImageBrowser.bundle */,
 			);
 			path = YBImageBrowser;
