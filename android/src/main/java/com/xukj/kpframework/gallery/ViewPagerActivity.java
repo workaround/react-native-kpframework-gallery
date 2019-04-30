@@ -1,5 +1,6 @@
 package com.xukj.kpframework.gallery;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,8 @@ public class ViewPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setOrientatoinConfiguration();
         setContentView(R.layout.view_pager);
 
         setDefaultConfiguration();
@@ -50,6 +53,21 @@ public class ViewPagerActivity extends AppCompatActivity {
     private void changeTitle() {
         mHeader.getTitleBarTitle().setText((mPosition + 1) + " / " + mImages.size());
     }
+
+    private void setOrientatoinConfiguration() {
+        Bundle bundle = getIntent().getExtras();
+        String orientation = bundle.getString("orientation");
+        if (orientation.equals("portrait")) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        else if (orientation.equals("landscape")) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
+        else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        }
+    }
+
 
     private void setDefaultConfiguration() {
         Bundle bundle = getIntent().getExtras();

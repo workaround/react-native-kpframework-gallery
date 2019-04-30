@@ -2,6 +2,7 @@ package com.xukj.kpframework.gallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -25,6 +26,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     private static final String KPPHOTO_GALLERY_KEY_IMAGE_URI = "uri";
     private static final String KPPHOTO_GALLERY_KEY_DEBUG = "debug";
     private static final String KPPHOTO_GALLERY_KEY_MODE = "mode";
+    private static final String KPPHOTO_GALLERY_KEY_ORIENTATION = "orientation";
 
     public static final String KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
     public static final String KPPHOTO_GALLERY_EVENT_ONCLOSE = "KPPHOTO_GALLERY_EVENT_ONCLOSE";
@@ -38,6 +40,8 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     private float maxScale = 2;
     private String mode; // 模式
     private boolean debug = false;
+    private String orientation = "auto";
+
     private ReadableMap options;
 
 
@@ -71,6 +75,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("images", images);
         bundle.putInt("index", index);
+        bundle.putString("orientation", orientation);
         intent.putExtras(bundle);
         mReactContext.startActivity(intent);
     }
@@ -81,11 +86,14 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         maxScale = options.hasKey(KPPHOTO_GALLERY_KEY_MAXSCALE) ? (float) options.getDouble(KPPHOTO_GALLERY_KEY_MAXSCALE) : maxScale;
         debug = options.hasKey(KPPHOTO_GALLERY_KEY_DEBUG) ? options.getBoolean(KPPHOTO_GALLERY_KEY_DEBUG) : debug;
         mode = options.hasKey(KPPHOTO_GALLERY_KEY_MODE) ? options.getString(KPPHOTO_GALLERY_KEY_MODE) : mode;
+        orientation = options.hasKey(KPPHOTO_GALLERY_KEY_ORIENTATION) ? options.getString(KPPHOTO_GALLERY_KEY_ORIENTATION) : orientation;
 
         images.clear();
         if (options.hasKey(KPPHOTO_GALLERY_KEY_IMAGES)) {
             setPhotoImages(options.getArray(KPPHOTO_GALLERY_KEY_IMAGES));
         }
+
+        Log.v("orientation", orientation);
     }
 
     private void setPhotoImages(final ReadableArray images) {

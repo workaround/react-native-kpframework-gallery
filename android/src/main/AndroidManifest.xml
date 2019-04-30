@@ -4,7 +4,6 @@
     <application>
         <activity
             android:name="com.xukj.kpframework.gallery.ViewPagerActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
     </application>
 </manifest>
