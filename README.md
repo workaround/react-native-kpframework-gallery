@@ -128,8 +128,8 @@ KPGallery.showGallery({ images },
 | debug  | 是否开启debug模式,仅android端有效                     | bool                | false     |
 | minScale     | 最小缩放比例，`mode`为`custom`时有效 | number                 | 0.5 / iOS固定为1   |
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
-| mode     | 图片显示模式`inside` `crop` `custom` | string                 | insde   |
-| orientation     | 横竖屏`auto` `portrait` `landscape` | string                 | auto   |
+| mode     | 图片显示模式`inside` `crop` `custom` | string                 | `insde`   |
+| orientation     | 横竖屏`auto` `portrait` `landscape` | string                 | `auto`   |
   
 #### image 单个图片属性(仅支持**android**)
 
