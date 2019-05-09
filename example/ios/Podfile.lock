@@ -1,6 +1,6 @@
 PODS:
   - KPGallery (0.0.3)
-  - KPNativeGallery (0.0.5):
+  - KPNativeGallery (0.0.6):
     - KPGallery
     - React/Core
   - React/Core (0.56.1):
@@ -63,7 +63,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   KPGallery: ee351c641bbfe922894473f0f459163d7c9da443
-  KPNativeGallery: 38dadd8abfd540795be87663d85c2696ae478c59
+  KPNativeGallery: 5e0619561104f9838bf101d528ab62a53a65e72b
   React: 5762f784e03a9bad2567eead64c74de9335029e3
   yoga: b9ed4d1df8b304449cc4d7f72c268eeaac2bbf85
 
