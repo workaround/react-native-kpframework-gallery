@@ -4,6 +4,6 @@
     <application>
         <activity
             android:name="com.xukj.kpframework.gallery.ViewPagerActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/KPRNGalleryTheme" />
     </application>
 </manifest>
