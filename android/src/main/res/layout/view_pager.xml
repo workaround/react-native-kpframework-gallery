@@ -1,11 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/fill"
+    style="@style/kp_fill"
     xmlns:gallery="http://schemas.android.com/apk/res-auto"
     >
 
     <com.xukj.kpframework.gallery.KPViewPager
         android:id="@+id/horizontal_pager"
-        style="@style/fill" />
+        style="@style/kp_fill" />
 
     <com.xukj.kpframework.gallery.ViewPagerBar
         android:id="@+id/header"

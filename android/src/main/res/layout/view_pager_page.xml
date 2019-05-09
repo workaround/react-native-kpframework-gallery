@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/fill">
+    style="@style/kp_fill">
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:id="@+id/imageView"
-        style="@style/fill" />
+        style="@style/kp_fill" />
 
     <ProgressBar
         android:id="@+id/loading"
