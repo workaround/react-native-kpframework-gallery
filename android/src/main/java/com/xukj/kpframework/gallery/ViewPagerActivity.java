@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 public class ViewPagerActivity extends AppCompatActivity {
 
     private ViewPagerBar mHeader;
-    private ViewPager mViewPager;
+    private KPViewPager mViewPager;
 
     // gallery图片
     private ArrayList<PhotoImage> mImages = new ArrayList<>();
@@ -90,7 +89,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         // 分页
         mViewPager = findViewById(R.id.horizontal_pager);
         mViewPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager()));
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new KPViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
