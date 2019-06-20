@@ -1,5 +1,6 @@
 package com.xukj.kpframework.gallery;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SeekBar;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -23,6 +28,11 @@ public class ViewPagerActivity extends AppCompatActivity {
 
     private ViewPagerBar mHeader;
     private KPViewPager mViewPager;
+    private ViewPageTextView mPageText;
+    private SeekBar mSeekBar;
+    private GestureDetector mGestureDetector;
+
+    private Context mContext;
 
     // gallery图片
     private ArrayList<PhotoImage> mImages = new ArrayList<>();
@@ -39,6 +49,8 @@ public class ViewPagerActivity extends AppCompatActivity {
         setDefaultConfiguration();
         setHeaderConfiguration();
         setViewPagerConfiguration();
+        setSeekConfig();
+        setGestureConfig();
         changeTitle();
     }
 
@@ -48,6 +60,11 @@ public class ViewPagerActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        mGestureDetector.onTouchEvent(ev);
+        return super.dispatchTouchEvent(ev);
+    }
 
     private void changeTitle() {
         mHeader.getTitleBarTitle().setText((mPosition + 1) + " / " + mImages.size());
@@ -65,6 +82,8 @@ public class ViewPagerActivity extends AppCompatActivity {
         else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
+
+        mContext = getApplicationContext();
     }
 
 
@@ -115,6 +134,44 @@ public class ViewPagerActivity extends AppCompatActivity {
         if (mImages.size() > mPosition) {
             mViewPager.setCurrentItem(mPosition);
         }
+    }
+
+    private void setSeekConfig() {
+        mPageText = findViewById(R.id.notice);
+        mPageText.getTitleText().setText(String.valueOf(mPosition + 1));
+        mPageText.setVisibility(View.GONE);
+
+        mSeekBar = findViewById(R.id.seekbar);
+        mSeekBar.setMax(mImages.size() - 1 >= 0 ? mImages.size() - 1 : 0);
+        mSeekBar.setProgress(mPosition);
+        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                mPageText.getTitleText().setText(String.valueOf(i + 1));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                mPageText.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mPageText.setVisibility(View.GONE);
+                mViewPager.setCurrentItem(seekBar.getProgress(), true);
+            }
+        });
+    }
+
+    private void setGestureConfig() {
+        mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                mSeekBar.setVisibility(mSeekBar.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+
     }
 
     /**
