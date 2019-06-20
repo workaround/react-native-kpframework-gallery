@@ -252,11 +252,12 @@
             BOOL distanceArrive = ABS(point.y - self->_gestureInteractionStartPoint.y) > self->_containerSize.height * self->_giProfile.dismissScale;
             
             BOOL shouldDismiss = distanceArrive || velocityArrive;
-            if (shouldDismiss) {
-                [self browserDismiss];
-            } else {
+            // modify by xukj - 只有单击才能关闭
+//            if (shouldDismiss) {
+//                [self browserDismiss];
+//            } else {
                 [self restoreGestureInteractionWithDuration:self->_giProfile.restoreDuration];
-            }
+//            }
         }
         
     } else if (pan.state == UIGestureRecognizerStateChanged) {
@@ -273,7 +274,8 @@
         // START
         if (shouldStart) {
             if ([UIApplication sharedApplication].statusBarOrientation != self->_statusBarOrientationBefore) {
-                [self browserDismiss];
+                // modify by xukj - 只有单击才能关闭
+//                [self browserDismiss];
             } else {
                 [self hideTailoringImageView];
                 

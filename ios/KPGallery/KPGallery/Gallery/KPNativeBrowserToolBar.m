@@ -9,6 +9,7 @@
 #import "KPNativeBrowserToolBar.h"
 #import "YBIBUtilities.h"
 #import "YBIBFileManager.h"
+#import "KPGalleryLabel.h"
 
 static CGFloat kToolBarDefaultsHeight = 50.0;
 
@@ -16,10 +17,9 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     id<YBImageBrowserCellDataProtocol> _data;
 }
 
-@property (nonatomic, strong) UILabel *indexLabel;
+@property (nonatomic, strong) KPGalleryLabel *indexLabel;
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) CAGradientLayer *gradient;
-@property (nonatomic, strong) UIView *vTitle;
 
 @end
 
@@ -32,9 +32,8 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     self = [super initWithFrame:frame];
     if (self) {
         [self.layer addSublayer:self.gradient];
-        [self addSubview:self.vTitle];
+        [self addSubview:self.indexLabel];
         [self addSubview:self.closeButton];
-        [self.vTitle addSubview:self.indexLabel];
     }
     return self;
 }
@@ -55,20 +54,14 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     self.frame = CGRectMake(0, 0, width, height);
     self.gradient.frame = self.bounds;
     
-    self.vTitle.frame = CGRectMake((width - labelWidth) / 2, 10, labelWidth + 10, height - 20);
-    self.indexLabel.frame = self.vTitle.bounds;
+    self.indexLabel.frame = CGRectMake((width - labelWidth) / 2, height - kToolBarDefaultsHeight, labelWidth + 10, kToolBarDefaultsHeight);
     
     self.closeButton.frame = CGRectMake(0, height - kToolBarDefaultsHeight, buttonWidth, kToolBarDefaultsHeight);
 }
 
 - (void)yb_browserPageIndexChanged:(NSUInteger)pageIndex totalPage:(NSUInteger)totalPage data:(id<YBImageBrowserCellDataProtocol>)data {
     self->_data = data;
-    if (totalPage <= 1) {
-        self.indexLabel.hidden = YES;
-    } else {
-        self.indexLabel.hidden  = NO;
-        self.indexLabel.text = [NSString stringWithFormat:@"%ld / %ld", pageIndex + 1, totalPage];
-    }
+    self.indexLabel.text = [NSString stringWithFormat:@"%ld / %ld", pageIndex + 1, totalPage];
 }
 
 #pragma mark - event
@@ -79,25 +72,19 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
 
 #pragma mark - getter
 
-- (UILabel *)indexLabel {
+- (KPGalleryLabel *)indexLabel {
     if (!_indexLabel) {
-        _indexLabel = [UILabel new];
+        _indexLabel = [KPGalleryLabel new];
         _indexLabel.textColor = [UIColor whiteColor];
         _indexLabel.font = [UIFont boldSystemFontOfSize:18];
         _indexLabel.textAlignment = NSTextAlignmentCenter;
+        _indexLabel.kpAlignment = KPAlignmentMiddle;
         _indexLabel.adjustsFontSizeToFitWidth = YES;
+        _indexLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        _indexLabel.layer.cornerRadius = 2;
+        _indexLabel.layer.masksToBounds = YES;
     }
     return _indexLabel;
-}
-
-- (UIView *)vTitle
-{
-    if (!_vTitle) {
-        _vTitle = [UIView new];
-        _vTitle.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-        _vTitle.layer.cornerRadius = 2;
-    }
-    return _vTitle;
 }
 
 - (UIButton *)closeButton {

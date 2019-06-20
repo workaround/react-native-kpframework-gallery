@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KPNativeBrowserSeekBar : UIView <YBImageBrowserToolBarProtocol>
 
+@property (nonatomic, strong, readonly) UIView *contentView;
 @property (nonatomic, strong, readonly) UISlider *slider;
 @property (nonatomic, weak)id<KPNativeBrowserSeekBarProtocal> delegate;
 

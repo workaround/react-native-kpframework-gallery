@@ -93,11 +93,17 @@ static CGFloat kPageSize = 100;
 
 #pragma mark - getter/setter
 
+- (UIView *)contentView
+{
+    return self.vToolBar;
+}
+
 - (UIView *)vToolBar
 {
     if (_vToolBar == nil) {
         _vToolBar = [UIView new];
         _vToolBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        _vToolBar.hidden = YES;
     }
     return _vToolBar;
 }

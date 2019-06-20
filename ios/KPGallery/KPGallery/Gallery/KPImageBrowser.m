@@ -52,7 +52,7 @@
 - (void)yb_imageBrowserViewDismiss:(YBImageBrowserView *)browserView {
     // 屏蔽单击关闭操作
     if (self.useSeek) {
-        self.kpSeekBar.hidden = !self.kpSeekBar.isHidden;
+        self.kpSeekBar.contentView.hidden = !self.kpSeekBar.contentView.isHidden;
     }
 }
 
@@ -124,7 +124,6 @@
 {
     if (_kpSeekBar == nil) {
         _kpSeekBar = [KPNativeBrowserSeekBar new];
-        _kpSeekBar.hidden = YES;
     }
     return _kpSeekBar;
 }
