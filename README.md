@@ -130,6 +130,8 @@ KPGallery.showGallery({ images },
 | maxScale     | 最大缩放比例，`mode`为`custom`时有效 | number                 | 2   |
 | mode     | 图片显示模式`inside` `crop` `custom` | string                 | `insde`   |
 | orientation     | 横竖屏`auto` `portrait` `landscape` | string                 | `auto`   |
+| seek     | 是否显示可拖动的进度条 | bool                 | false   |
+  
   
 #### image 单个图片属性(仅支持**android**)
 
