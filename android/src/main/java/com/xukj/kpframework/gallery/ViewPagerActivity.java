@@ -120,6 +120,9 @@ public class ViewPagerActivity extends AppCompatActivity {
                 params.putInt(KPGalleryModule.KPPHOTO_GALLERY_KEY_INDEX, position);
                 sendEventToJS(KPGalleryModule.KPPHOTO_GALLERY_EVENT_ONPAGECHANGED, params);
 
+                if (mPosition != mSeekBar.getProgress()) {
+                    mSeekBar.setProgress(mPosition);
+                }
                 changeTitle();
             }
 
