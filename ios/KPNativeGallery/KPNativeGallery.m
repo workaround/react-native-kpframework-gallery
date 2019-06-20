@@ -19,6 +19,7 @@
 #define KPPHOTO_GALLERY_KEY_MINSCALE @"minScale"
 #define KPPHOTO_GALLERY_KEY_MODE @"mode"
 #define KPPHOTO_GALLERY_KEY_ORINENTATION @"orientation"
+#define KPPHOTO_GALLERY_KEY_SEEK @"seek"
 
 #define KPMODE_INSIDE @"inside"
 #define KPMODE_CROP @"crop"
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) NSString *mode;
 @property (nonatomic, assign) BOOL debug;
 @property (nonatomic, strong) NSString *orinentation;
+@property (nonatomic, assign) BOOL seek;
 
 @property (nonatomic, strong) NSDictionary *options;
 
@@ -61,7 +63,8 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options)
     self.debug = [[options valueForKey:KPPHOTO_GALLERY_KEY_DEBUG] boolValue];
     self.mode = [options valueForKey:KPPHOTO_GALLERY_KEY_MODE];
     self.orinentation = [options valueForKey:KPPHOTO_GALLERY_KEY_ORINENTATION];
-    
+    self.seek = [[options valueForKey:KPPHOTO_GALLERY_KEY_SEEK] boolValue];
+
     [self setGlobalConfiguration];
     [self setImagesConfiguration];
 }
@@ -102,6 +105,7 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options)
         browser.currentIndex = self.index;
         browser.kpDelegate = self;
         browser.kpOrientation = self.orinentation;
+        browser.useSeek = self.seek;
         [browser show];
     });
 }
