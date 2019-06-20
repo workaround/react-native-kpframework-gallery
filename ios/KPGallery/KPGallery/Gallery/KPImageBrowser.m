@@ -8,10 +8,12 @@
 
 #import "KPImageBrowser.h"
 #import "KPNativeBrowserToolBar.h"
+#import "KPNativeBrowserSeekBar.h"
 
 @interface KPImageBrowser ()<YBImageBrowserDelegate>
 
 @property (nonatomic, strong) KPNativeBrowserToolBar *kpToolBar;
+@property (nonatomic, strong) KPNativeBrowserSeekBar *kpSeekBar;
 @property (nonatomic, assign) UIInterfaceOrientation kpOrientationBefore;
 
 @end
@@ -22,7 +24,7 @@
 {
     self = [super init];
     if (self) {
-        self.toolBars = @[self.kpToolBar];
+        self.toolBars = @[self.kpToolBar, self.kpSeekBar];
         self.delegate = self;
         self.kpOrientationBefore = UIInterfaceOrientationUnknown;
     }
@@ -43,6 +45,9 @@
 
 - (void)yb_imageBrowserViewDismiss:(YBImageBrowserView *)browserView {
     // 屏蔽单击关闭操作
+    if (self.useSeek) {
+        self.kpSeekBar.hidden = !self.kpSeekBar.isHidden;
+    }
 }
 
 - (void)show {
@@ -107,6 +112,15 @@
         [_kpToolBar.closeButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
     }
     return _kpToolBar;
+}
+
+- (KPNativeBrowserSeekBar *)kpSeekBar
+{
+    if (_kpSeekBar == nil) {
+        _kpSeekBar = [KPNativeBrowserSeekBar new];
+        _kpSeekBar.hidden = YES;
+    }
+    return _kpSeekBar;
 }
 
 - (void)dealloc

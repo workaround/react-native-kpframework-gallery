@@ -31,7 +31,7 @@ export default class HomePage extends React.PureComponent {
      */
     _onPress = () => {
         KPGallery.showGallery(
-            { images, debug: true, mode: 'crop', orientation: 'portrait', seek: true },
+            { images, debug: true, mode: 'crop', orientation: 'auto', seek: true },
             index => {
                 console.log('callback', index);
             },

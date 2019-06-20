@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		392104B922BB63CE00FAC8FE /* KPGalleryLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 392104B522BB63CE00FAC8FE /* KPGalleryLabel.m */; };
+		392104BA22BB63CF00FAC8FE /* KPGalleryLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 392104B622BB63CE00FAC8FE /* KPGalleryLabel.h */; };
+		392104BB22BB63CF00FAC8FE /* KPNativeBrowserSeekBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 392104B722BB63CE00FAC8FE /* KPNativeBrowserSeekBar.h */; };
+		392104BC22BB63CF00FAC8FE /* KPNativeBrowserSeekBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 392104B822BB63CE00FAC8FE /* KPNativeBrowserSeekBar.m */; };
 		399D802C226EF533008D8765 /* KPGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 399D802A226EF533008D8765 /* KPGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		399D80BB226EF5BE008D8765 /* KPNativeBrowserToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D8033226EF5BD008D8765 /* KPNativeBrowserToolBar.m */; };
 		399D80BC226EF5BE008D8765 /* KPImageBrowseCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 399D8034226EF5BD008D8765 /* KPImageBrowseCellData.m */; };
@@ -151,6 +155,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		392104B522BB63CE00FAC8FE /* KPGalleryLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPGalleryLabel.m; sourceTree = "<group>"; };
+		392104B622BB63CE00FAC8FE /* KPGalleryLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPGalleryLabel.h; sourceTree = "<group>"; };
+		392104B722BB63CE00FAC8FE /* KPNativeBrowserSeekBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNativeBrowserSeekBar.h; sourceTree = "<group>"; };
+		392104B822BB63CE00FAC8FE /* KPNativeBrowserSeekBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNativeBrowserSeekBar.m; sourceTree = "<group>"; };
 		399D8027226EF533008D8765 /* KPGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KPGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		399D802A226EF533008D8765 /* KPGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPGallery.h; sourceTree = "<group>"; };
 		399D802B226EF533008D8765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -325,13 +333,17 @@
 		399D8032226EF5BD008D8765 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
-				399D8033226EF5BD008D8765 /* KPNativeBrowserToolBar.m */,
-				399D8034226EF5BD008D8765 /* KPImageBrowseCellData.m */,
 				399D8038226EF5BD008D8765 /* KPImageBrowser.h */,
 				399D8035226EF5BD008D8765 /* KPImageBrowser.m */,
 				399D8036226EF5BD008D8765 /* KPNativeBrowserToolBar.h */,
+				399D8033226EF5BD008D8765 /* KPNativeBrowserToolBar.m */,
 				399D8037226EF5BD008D8765 /* KPImageBrowseCellData.h */,
+				399D8034226EF5BD008D8765 /* KPImageBrowseCellData.m */,
 				399D822D226F26FD008D8765 /* KPImageBrowserDelegate.h */,
+				392104B622BB63CE00FAC8FE /* KPGalleryLabel.h */,
+				392104B522BB63CE00FAC8FE /* KPGalleryLabel.m */,
+				392104B722BB63CE00FAC8FE /* KPNativeBrowserSeekBar.h */,
+				392104B822BB63CE00FAC8FE /* KPNativeBrowserSeekBar.m */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -556,6 +568,7 @@
 				399D8100226EF5BE008D8765 /* YBVideoBrowseTopBar.h in Headers */,
 				399D810F226EF5BE008D8765 /* UIImage+Utils.h in Headers */,
 				399D8124226EF5BE008D8765 /* YBIBWebImageManager.h in Headers */,
+				392104BB22BB63CF00FAC8FE /* KPNativeBrowserSeekBar.h in Headers */,
 				399D80C3226EF5BE008D8765 /* KPSDWebImageCoder.h in Headers */,
 				399D80EC226EF5BE008D8765 /* UIImage+KPForceDecode.h in Headers */,
 				399D8134226EF5BE008D8765 /* YYAnimatedImageView.h in Headers */,
@@ -566,6 +579,7 @@
 				399D8108226EF5BE008D8765 /* YBImageBrowserTipView.h in Headers */,
 				399D80FB226EF5BE008D8765 /* YBImageBrowserCellProtocol.h in Headers */,
 				399D8128226EF5BE008D8765 /* YBImageBrowser+Internal.h in Headers */,
+				392104BA22BB63CF00FAC8FE /* KPGalleryLabel.h in Headers */,
 				399D8117226EF5BE008D8765 /* YBIBFileManager.h in Headers */,
 				399D80D7226EF5BE008D8765 /* KPSDWebImageImageIOCoder.h in Headers */,
 				399D812A226EF5BE008D8765 /* YBImageBrowserView.h in Headers */,
@@ -700,12 +714,14 @@
 				399D80BD226EF5BE008D8765 /* KPImageBrowser.m in Sources */,
 				399D80DE226EF5BE008D8765 /* KPSDImageCache.m in Sources */,
 				399D8107226EF5BE008D8765 /* YBImageBrowserToolBar.m in Sources */,
+				392104BC22BB63CF00FAC8FE /* KPNativeBrowserSeekBar.m in Sources */,
 				399D8122226EF5BE008D8765 /* YBIBLayoutDirectionManager.m in Sources */,
 				399D811B226EF5BE008D8765 /* YBIBWebImageManager.m in Sources */,
 				399D8113226EF5BE008D8765 /* UIImage+Utils.m in Sources */,
 				399D8110226EF5BE008D8765 /* YBImageBrowseCellData.m in Sources */,
 				399D8120226EF5BE008D8765 /* YBIBCopywriter.m in Sources */,
 				399D80D8226EF5BE008D8765 /* KPSDWebImagePrefetcher.m in Sources */,
+				392104B922BB63CE00FAC8FE /* KPGalleryLabel.m in Sources */,
 				399D80E1226EF5BE008D8765 /* KPSDWebImageDownloaderOperation.m in Sources */,
 				399D8125226EF5BE008D8765 /* YBIBTransitionManager.m in Sources */,
 				399D80EE226EF5BE008D8765 /* UIView+KPWebCache.m in Sources */,

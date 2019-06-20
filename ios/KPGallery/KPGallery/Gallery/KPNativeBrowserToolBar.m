@@ -19,6 +19,7 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) CAGradientLayer *gradient;
+@property (nonatomic, strong) UIView *vTitle;
 
 @end
 
@@ -31,8 +32,9 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     self = [super initWithFrame:frame];
     if (self) {
         [self.layer addSublayer:self.gradient];
-        [self addSubview:self.indexLabel];
+        [self addSubview:self.vTitle];
         [self addSubview:self.closeButton];
+        [self.vTitle addSubview:self.indexLabel];
     }
     return self;
 }
@@ -40,13 +42,22 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
 #pragma mark - <YBImageBrowserToolBarProtocol>
 
 - (void)yb_browserUpdateLayoutWithDirection:(YBImageBrowserLayoutDirection)layoutDirection containerSize:(CGSize)containerSize {
-    CGFloat height = kToolBarDefaultsHeight, width = containerSize.width, buttonWidth = 53, labelWidth = width / 3.0, hExtra = 0;
+    
+    CGFloat height = kToolBarDefaultsHeight;
+    CGFloat width = containerSize.width;
+    CGFloat buttonWidth = 53;
+    CGFloat labelWidth = width / 3.0;
+    CGFloat hExtra = 0;
+    
     if (containerSize.height > containerSize.width && YBIB_IS_IPHONEX) height += YBIB_HEIGHT_STATUSBAR;
     if (containerSize.height < containerSize.width && YBIB_IS_IPHONEX) hExtra += YBIB_HEIGHT_EXTRABOTTOM;
     
     self.frame = CGRectMake(0, 0, width, height);
     self.gradient.frame = self.bounds;
-    self.indexLabel.frame = CGRectMake(0, height - kToolBarDefaultsHeight, width, kToolBarDefaultsHeight);
+    
+    self.vTitle.frame = CGRectMake((width - labelWidth) / 2, 10, labelWidth + 10, height - 20);
+    self.indexLabel.frame = self.vTitle.bounds;
+    
     self.closeButton.frame = CGRectMake(0, height - kToolBarDefaultsHeight, buttonWidth, kToolBarDefaultsHeight);
 }
 
@@ -77,6 +88,16 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
         _indexLabel.adjustsFontSizeToFitWidth = YES;
     }
     return _indexLabel;
+}
+
+- (UIView *)vTitle
+{
+    if (!_vTitle) {
+        _vTitle = [UIView new];
+        _vTitle.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        _vTitle.layer.cornerRadius = 2;
+    }
+    return _vTitle;
 }
 
 - (UIButton *)closeButton {

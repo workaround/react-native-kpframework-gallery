@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) _Nullable id<KPImageBrowserDelegate> kpDelegate;
 
-@property (nonatomic, assign) NSString *kpOrientation;
+@property (nonatomic, strong) NSString *kpOrientation;
+@property (nonatomic, assign) BOOL useSeek;
 
 @end
 
