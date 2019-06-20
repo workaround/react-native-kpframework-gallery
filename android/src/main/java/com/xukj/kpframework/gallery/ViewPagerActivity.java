@@ -32,11 +32,10 @@ public class ViewPagerActivity extends AppCompatActivity {
     private SeekBar mSeekBar;
     private GestureDetector mGestureDetector;
 
-    private Context mContext;
-
     // gallery图片
     private ArrayList<PhotoImage> mImages = new ArrayList<>();
     private int mPosition = 0;
+    private boolean useSeek = false;
 
 
     @Override
@@ -82,8 +81,6 @@ public class ViewPagerActivity extends AppCompatActivity {
         else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
-
-        mContext = getApplicationContext();
     }
 
 
@@ -91,6 +88,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         mPosition = bundle.getInt("index");
         mImages = bundle.getParcelableArrayList("images");
+        useSeek = bundle.getBoolean("seek");
     }
 
     private void setHeaderConfiguration() {
@@ -167,7 +165,9 @@ public class ViewPagerActivity extends AppCompatActivity {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                mSeekBar.setVisibility(mSeekBar.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+                if (useSeek) {
+                    mSeekBar.setVisibility(mSeekBar.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+                }
                 return super.onSingleTapConfirmed(e);
             }
         });

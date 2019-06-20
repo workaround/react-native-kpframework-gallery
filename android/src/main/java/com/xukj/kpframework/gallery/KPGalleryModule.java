@@ -27,6 +27,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     private static final String KPPHOTO_GALLERY_KEY_DEBUG = "debug";
     private static final String KPPHOTO_GALLERY_KEY_MODE = "mode";
     private static final String KPPHOTO_GALLERY_KEY_ORIENTATION = "orientation";
+    private static final String KPPHOTO_GALLERY_KEY_USESEEK = "seek";
 
     public static final String KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
     public static final String KPPHOTO_GALLERY_EVENT_ONCLOSE = "KPPHOTO_GALLERY_EVENT_ONCLOSE";
@@ -41,6 +42,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
     private String mode; // 模式
     private boolean debug = false;
     private String orientation = "auto";
+    private boolean seek = false;
 
     private ReadableMap options;
 
@@ -76,6 +78,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         bundle.putParcelableArrayList("images", images);
         bundle.putInt("index", index);
         bundle.putString("orientation", orientation);
+        bundle.putBoolean("seek", seek);
         intent.putExtras(bundle);
         mReactContext.startActivity(intent);
     }
@@ -87,6 +90,7 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         debug = options.hasKey(KPPHOTO_GALLERY_KEY_DEBUG) ? options.getBoolean(KPPHOTO_GALLERY_KEY_DEBUG) : debug;
         mode = options.hasKey(KPPHOTO_GALLERY_KEY_MODE) ? options.getString(KPPHOTO_GALLERY_KEY_MODE) : mode;
         orientation = options.hasKey(KPPHOTO_GALLERY_KEY_ORIENTATION) ? options.getString(KPPHOTO_GALLERY_KEY_ORIENTATION) : orientation;
+        seek = options.hasKey(KPPHOTO_GALLERY_KEY_USESEEK) ? options.getBoolean(KPPHOTO_GALLERY_KEY_USESEEK) : seek;
 
         images.clear();
         if (options.hasKey(KPPHOTO_GALLERY_KEY_IMAGES)) {
