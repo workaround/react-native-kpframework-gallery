@@ -10,7 +10,7 @@
 #import "KPNativeBrowserToolBar.h"
 #import "KPNativeBrowserSeekBar.h"
 
-@interface KPImageBrowser ()<YBImageBrowserDelegate>
+@interface KPImageBrowser ()<YBImageBrowserDelegate, KPNativeBrowserSeekBarProtocal>
 
 @property (nonatomic, strong) KPNativeBrowserToolBar *kpToolBar;
 @property (nonatomic, strong) KPNativeBrowserSeekBar *kpSeekBar;
@@ -26,6 +26,7 @@
     if (self) {
         self.toolBars = @[self.kpToolBar, self.kpSeekBar];
         self.delegate = self;
+        self.kpSeekBar.delegate = self;
         self.kpOrientationBefore = UIInterfaceOrientationUnknown;
     }
     return self;
@@ -39,6 +40,11 @@
     if (self.kpDelegate && [self.kpDelegate respondsToSelector:@selector(imageBrowser:pageIndexChanged:)]) {
         [self.kpDelegate imageBrowser:self pageIndexChanged:index];
     }
+}
+
+- (void)seekbar:(UISlider *)slider didChangeIndex:(NSUInteger)index
+{
+    self.currentIndex = index;
 }
 
 #pragma mark - override
@@ -103,7 +109,7 @@
     }
 }
 
-#pragma mark - getter
+#pragma mark - getter/setter
 
 - (KPNativeBrowserToolBar *)kpToolBar
 {

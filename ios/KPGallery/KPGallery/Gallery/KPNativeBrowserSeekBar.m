@@ -52,7 +52,7 @@ static CGFloat kPageSize = 100;
     self.frame = CGRectMake(0, YBIMAGEBROWSER_HEIGHT - height, width, height);
     
     self.vToolBar.frame = self.bounds;
-    self.slider.frame = CGRectMake(5, height / 2 - 4, width - 10, 8);
+    self.slider.frame = CGRectMake(5, height / 2 - 10, width - 10, 20);
     
     self.vPageView.frame = CGRectMake(0, 0, kPageSize, kPageSize);
     self.vPageView.center = CGPointMake(YBIMAGEBROWSER_WIDTH / 2, YBIMAGEBROWSER_HEIGHT / 2);
@@ -61,26 +61,32 @@ static CGFloat kPageSize = 100;
 
 -(void)yb_browserPageIndexChanged:(NSUInteger)pageIndex totalPage:(NSUInteger)totalPage data:(id<YBImageBrowserCellDataProtocol>)data
 {
-    
+    self.slider.maximumValue = totalPage - 1;
+    self.slider.value = pageIndex;
 }
 
 #pragma mark - private
 
 - (void)onValueChanged:(UISlider *)slider
 {
-    NSLog(@"%lf", slider.value);
-    
     if (!self.seeking) {
         self.seeking = YES;
-        
         [self.superview addSubview:self.vPageView];
     }
+    
+    NSUInteger index = (NSUInteger)(slider.value + 0.5);
+    [slider setValue:index animated:NO];
+    
+    self.labPage.text = [NSString stringWithFormat:@"%lu", index + 1];
 }
 
 - (void)onTouchUp:(UISlider *)slider
 {
-    NSLog(@"onTouchUp");
     self.seeking = NO;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(seekbar:didChangeIndex:)]) {
+        [self.delegate seekbar:slider didChangeIndex:(NSUInteger)slider.value];
+    }
     
     [self.vPageView removeFromSuperview];
 }
@@ -115,7 +121,6 @@ static CGFloat kPageSize = 100;
         _labPage.textColor = [UIColor whiteColor];
         _labPage.textAlignment = NSTextAlignmentCenter;
         _labPage.kpAlignment = KPAlignmentMiddle;
-        _labPage.text = @"888";
     }
     return _labPage;
 }
