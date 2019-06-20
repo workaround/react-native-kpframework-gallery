@@ -49,13 +49,13 @@ static CGFloat kPageSize = 100;
     if (containerSize.height > containerSize.width && YBIB_IS_IPHONEX) height += YBIB_HEIGHT_STATUSBAR;
     if (containerSize.height < containerSize.width && YBIB_IS_IPHONEX) hExtra += YBIB_HEIGHT_EXTRABOTTOM;
     
-    self.frame = CGRectMake(0, YBIMAGEBROWSER_HEIGHT - height, width, height);
+    self.frame = CGRectMake(0, containerSize.height - height, width, height);
     
     self.vToolBar.frame = self.bounds;
     self.slider.frame = CGRectMake(5, height / 2 - 10, width - 10, 20);
     
     self.vPageView.frame = CGRectMake(0, 0, kPageSize, kPageSize);
-    self.vPageView.center = CGPointMake(YBIMAGEBROWSER_WIDTH / 2, YBIMAGEBROWSER_HEIGHT / 2);
+    self.vPageView.center = CGPointMake(containerSize.width / 2, containerSize.height / 2);
     self.labPage.frame = self.vPageView.bounds;
 }
 
