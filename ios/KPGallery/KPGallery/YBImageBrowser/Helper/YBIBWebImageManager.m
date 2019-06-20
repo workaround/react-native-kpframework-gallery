@@ -7,10 +7,10 @@
 //
 
 #import "YBIBWebImageManager.h"
-#if __has_include(<SDWebImage/SDWebImageManager.h>)
-#import <SDWebImage/SDWebImageManager.h>
+#if __has_include(<SDWebImage/KPSDWebImageManager.h>)
+#import <SDWebImage/KPSDWebImageManager.h>
 #else
-#import "SDWebImageManager.h"
+#import "KPSDWebImageManager.h"
 #endif
 
 static BOOL _downloaderShouldDecompressImages;
@@ -21,20 +21,20 @@ static BOOL _cacheShouldDecompressImages;
 #pragma mark public
 
 + (void)storeOutsideConfiguration {
-    _downloaderShouldDecompressImages = [SDWebImageDownloader sharedDownloader].shouldDecompressImages;
-    _cacheShouldDecompressImages = [SDImageCache sharedImageCache].config.shouldDecompressImages;
-    [SDWebImageDownloader sharedDownloader].shouldDecompressImages = NO;
-    [SDImageCache sharedImageCache].config.shouldDecompressImages = NO;
+    _downloaderShouldDecompressImages = [KPSDWebImageDownloader sharedDownloader].shouldDecompressImages;
+    _cacheShouldDecompressImages = [KPSDImageCache sharedImageCache].config.shouldDecompressImages;
+    [KPSDWebImageDownloader sharedDownloader].shouldDecompressImages = NO;
+    [KPSDImageCache sharedImageCache].config.shouldDecompressImages = NO;
 }
 
 + (void)restoreOutsideConfiguration {
-    [SDWebImageDownloader sharedDownloader].shouldDecompressImages = _downloaderShouldDecompressImages;
-    [SDImageCache sharedImageCache].config.shouldDecompressImages = _cacheShouldDecompressImages;
+    [KPSDWebImageDownloader sharedDownloader].shouldDecompressImages = _downloaderShouldDecompressImages;
+    [KPSDImageCache sharedImageCache].config.shouldDecompressImages = _cacheShouldDecompressImages;
 }
 
 + (id)downloadImageWithURL:(NSURL *)url progress:(YBIBWebImageManagerProgressBlock)progress success:(YBIBWebImageManagerSuccessBlock)success failed:(YBIBWebImageManagerFailedBlock)failed {
     if (!url) return nil;
-    SDWebImageDownloadToken *token = [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:url options:SDWebImageDownloaderLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+    SDWebImageDownloadToken *token = [[KPSDWebImageDownloader sharedDownloader] downloadImageWithURL:url options:SDWebImageDownloaderLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         if (progress) {
             progress(receivedSize, expectedSize, targetURL);
         }
@@ -58,21 +58,21 @@ static BOOL _cacheShouldDecompressImages;
 
 + (void)storeImage:(UIImage *)image imageData:(NSData *)data forKey:(NSURL *)key toDisk:(BOOL)toDisk {
     if (!key) return;
-    NSString *cacheKey = [SDWebImageManager.sharedManager cacheKeyForURL:key];
+    NSString *cacheKey = [KPSDWebImageManager.sharedManager cacheKeyForURL:key];
     if (!cacheKey) return;
     
-    [[SDImageCache sharedImageCache] storeImage:image imageData:data forKey:cacheKey toDisk:toDisk completion:nil];
+    [[KPSDImageCache sharedImageCache] storeImage:image imageData:data forKey:cacheKey toDisk:toDisk completion:nil];
 }
 
 + (void)queryCacheOperationForKey:(NSURL *)key completed:(YBIBWebImageManagerCacheQueryCompletedBlock)completed {
 #define QUERY_CACHE_FAILED if (completed) {completed(nil, nil); return;}
     if (!key) QUERY_CACHE_FAILED
-    NSString *cacheKey = [SDWebImageManager.sharedManager cacheKeyForURL:key];
+    NSString *cacheKey = [KPSDWebImageManager.sharedManager cacheKeyForURL:key];
     if (!cacheKey) QUERY_CACHE_FAILED
 #undef QUERY_CACHE_FAILED
         
     SDImageCacheOptions options = SDImageCacheQueryDataWhenInMemory;
-    [[SDImageCache sharedImageCache] queryCacheOperationForKey:cacheKey options:options done:^(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType) {
+    [[KPSDImageCache sharedImageCache] queryCacheOperationForKey:cacheKey options:options done:^(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType) {
         if (completed) {
             completed(image, data);
         }
