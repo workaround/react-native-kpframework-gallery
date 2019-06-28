@@ -12,6 +12,8 @@ export default class Home extends React.PureComponent {
     static propTypes = {
         message: PropTypes.string,
         onPress: PropTypes.func,
+        onSizePress: PropTypes.func,
+        onClearPress: PropTypes.func,
     };
 
     static defaultProps = {
@@ -29,9 +31,22 @@ export default class Home extends React.PureComponent {
         return (
             <View style={styles.page}>
                 <Text>{this.props.message}</Text>
+                <View style={{ height: 50 }} />
                 <TouchableWithoutFeedback onPress={this.props.onPress}>
                     <View>
                         <Text style={styles.button}>点击查看图片详情</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                <View style={{ height: 20 }} />
+                <TouchableWithoutFeedback onPress={this.props.onSizePress}>
+                    <View>
+                        <Text style={styles.button}>获取缓存大小</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                <View style={{ height: 20 }} />
+                <TouchableWithoutFeedback onPress={this.props.onClearPress}>
+                    <View>
+                        <Text style={styles.button}>清空缓存</Text>
                     </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -44,7 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     button: {
         padding: 8,

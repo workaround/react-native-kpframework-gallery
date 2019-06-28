@@ -23,7 +23,14 @@ export default class HomePage extends React.PureComponent {
     componentDidMount() {}
 
     render() {
-        return <Home message={this.state.message} onPress={this._onPress} />;
+        return (
+            <Home
+                message={this.state.message}
+                onPress={this._onPress}
+                onSizePress={this._onSizePress}
+                onClearPress={this._onClearPress}
+            />
+        );
     }
 
     /*
@@ -34,24 +41,28 @@ export default class HomePage extends React.PureComponent {
         KPGallery.showGallery(
             { images, debug: true, mode: 'crop', orientation: 'auto', seek: true },
             index => {
-                console.log('callback', index);
+                this.setState({ message: `页面 ${index}` });
             },
             () => {
-                console.log('callback', 'close');
+                this.setState({ message: '页面 close' });
             }
         );
+    };
 
-        // KPGallery.getCacheSize().then(size => {
-        //     this.setState({ message: size });
-        // });
+    _onSizePress = () => {
+        KPGallery.getCacheSize().then(size => {
+            this.setState({ message: size });
+        });
+    };
 
-        // KPGallery.clearCache()
-        //     .then(() => {
-        //         this.setState({ message: '清空完毕' });
-        //     })
-        //     .catch(error => {
-        //         this.setState({ message: error.message });
-        //     });
+    _onClearPress = () => {
+        KPGallery.clearCache()
+            .then(() => {
+                this.setState({ message: '清空完毕' });
+            })
+            .catch(error => {
+                this.setState({ message: error.message });
+            });
     };
 }
 
