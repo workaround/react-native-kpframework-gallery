@@ -10,6 +10,7 @@ import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 export default class Home extends React.PureComponent {
     static propTypes = {
+        message: PropTypes.string,
         onPress: PropTypes.func,
     };
 
@@ -27,6 +28,7 @@ export default class Home extends React.PureComponent {
     render() {
         return (
             <View style={styles.page}>
+                <Text>{this.props.message}</Text>
                 <TouchableWithoutFeedback onPress={this.props.onPress}>
                     <View>
                         <Text style={styles.button}>点击查看图片详情</Text>

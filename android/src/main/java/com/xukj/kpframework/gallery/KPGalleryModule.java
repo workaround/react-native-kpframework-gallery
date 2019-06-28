@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -81,6 +82,33 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
         bundle.putBoolean("seek", seek);
         intent.putExtras(bundle);
         mReactContext.startActivity(intent);
+    }
+
+    /**
+     * 获取缓存大小
+     * @param options
+     * @param promise
+     */
+    @ReactMethod
+    public void getCacheSize(ReadableMap options, Promise promise) {
+        long size = KPCacheUtil.getInstance().getCacheSize(mReactContext);
+        promise.resolve(String.valueOf(size));
+    }
+
+    /**
+     * 清空缓存
+     * @param options
+     * @param promise
+     */
+    @ReactMethod
+    public void clearCache(ReadableMap options, Promise promise) {
+        boolean result = KPCacheUtil.getInstance().clearCache(mReactContext);
+        if (result) {
+            promise.resolve(null);
+        }
+        else {
+            promise.reject("-1", "清除缓存出错");
+        }
     }
 
     private void setConfiguration(final ReadableMap options) {

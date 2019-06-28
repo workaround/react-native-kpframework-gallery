@@ -17,12 +17,13 @@ export default class HomePage extends React.PureComponent {
 
     constructor(props) {
         super(props);
+        this.state = { message: '' };
     }
 
     componentDidMount() {}
 
     render() {
-        return <Home onPress={this._onPress} />;
+        return <Home message={this.state.message} onPress={this._onPress} />;
     }
 
     /*
@@ -39,6 +40,18 @@ export default class HomePage extends React.PureComponent {
                 console.log('callback', 'close');
             }
         );
+
+        // KPGallery.getCacheSize().then(size => {
+        //     this.setState({ message: size });
+        // });
+
+        // KPGallery.clearCache()
+        //     .then(() => {
+        //         this.setState({ message: '清空完毕' });
+        //     })
+        //     .catch(error => {
+        //         this.setState({ message: error.message });
+        //     });
     };
 }
 
