@@ -8,6 +8,7 @@
 
 #import "KPNativeGallery.h"
 #import <KPGallery/KPGallery.h>
+#import <KPGallery/KPSDImageCache.h>
 
 #define KPPHOTO_GALLERY_EVENT_ONPAGECHANGED @"KPPHOTO_GALLERY_EVENT_ONPAGECHANGED"
 #define KPPHOTO_GALLERY_EVENT_ONCLOSE @"KPPHOTO_GALLERY_EVENT_ONCLOSE"
@@ -67,6 +68,29 @@ RCT_EXPORT_METHOD(showGallery:(NSDictionary *)options)
 
     [self setGlobalConfiguration];
     [self setImagesConfiguration];
+}
+
+RCT_EXPORT_METHOD(getCacheSize:(NSDictionary *)options
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSUInteger size = [[KPSDImageCache sharedImageCache] getSize];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            resolve(@(size));
+        });
+    });
+}
+
+RCT_EXPORT_METHOD(clearCache:(NSDictionary *)options
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[KPSDImageCache sharedImageCache] clearDiskOnCompletion:^{
+            resolve(nil);
+        }];
+    });
 }
 
 - (void)setGlobalConfiguration

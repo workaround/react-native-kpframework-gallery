@@ -73,6 +73,16 @@ function showGallery(options = {}, onPageChanged = null, onClose = null) {
     KPNativeGallery.showGallery(values);
 }
 
+function getCacheSize() {
+    return KPNativeGallery.getCacheSize({});
+}
+
+function clearCache() {
+    return KPNativeGallery.clearCache({});
+}
+
 export default {
     showGallery,
+    getCacheSize,
+    clearCache,
 };
