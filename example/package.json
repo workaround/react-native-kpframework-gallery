@@ -5,7 +5,8 @@
     "scripts": {
         "start": "node node_modules/react-native/local-cli/cli.js start",
         "test": "jest",
-        "iosFix": "node script/ios-xcode10-script"
+        "iosFix": "node script/ios-xcode10-script",
+        "ios-simulator-fix": "node script/xcode10-run-simulator"
     },
     "dependencies": {
         "prop-types": "15.6.2",
