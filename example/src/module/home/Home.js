@@ -30,7 +30,7 @@ export default class Home extends React.PureComponent {
     render() {
         return (
             <View style={styles.page}>
-                <Text>{this.props.message}</Text>
+                <Text style={styles.message}>{this.props.message}</Text>
                 <View style={{ height: 50 }} />
                 <TouchableWithoutFeedback onPress={this.props.onPress}>
                     <View>
@@ -57,11 +57,18 @@ export default class Home extends React.PureComponent {
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
     },
+    message: {
+        marginTop: 20,
+    },
     button: {
+        marginTop: 20,
+        borderColor: 'black',
+        borderWidth: StyleSheet.hairlineWidth,
+        borderRadius: 4,
+        textAlign: 'center',
         padding: 8,
     },
 });

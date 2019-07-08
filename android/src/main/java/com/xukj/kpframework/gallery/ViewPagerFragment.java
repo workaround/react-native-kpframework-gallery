@@ -2,11 +2,11 @@ package com.xukj.kpframework.gallery;
 
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -16,8 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.ImageViewState;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -73,50 +75,42 @@ public class ViewPagerFragment extends Fragment {
         }
     }
 
-    /**
-     * 获取图片
-     */
     private void loadPhotoImage() {
         if (image == null || image.getUri() == null) return;
+        mProgress.setVisibility(View.VISIBLE);
+        mTextView.setText("");
+        mTextView.setVisibility(View.GONE);
+        Glide.with(this).asFile().load(image.getUri())
+                .listener(new RequestListener<File>() {
 
-        // 网络图片
-        Glide.with(this).load(image.getUri()).downloadOnly(new SimpleTarget<File>() {
-            @Override
-            public void onLoadStarted(Drawable placeholder) {
-                super.onLoadStarted(placeholder);
-                mProgress.setVisibility(View.VISIBLE);
-                mTextView.setText("");
-                mTextView.setVisibility(View.GONE);
-            }
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
+                        mProgress.setVisibility(View.GONE);
+                        mTextView.setText("图片加载失败");
+                        mTextView.setVisibility(View.VISIBLE);
+                        return false;
+                    }
 
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                super.onLoadFailed(e, errorDrawable);
-                mProgress.setVisibility(View.GONE);
-                mTextView.setText("图片加载失败");
-                mTextView.setVisibility(View.VISIBLE);
-            }
+                    @Override
+                    public boolean onResourceReady(File resource, Object model, Target<File> target, DataSource dataSource, boolean isFirstResource) {
+                        String mode = image.getMode() != null ? image.getMode() : "inside";
+                        switch (mode) {
+                            case "custom":
+                                setCustomMode(resource, image);
+                                break;
+                            case "crop":
+                                setCropMode(resource, image);
+                                break;
+                            default:
+                                setInsideMode(resource, image);
+                                break;
+                        }
 
-            @Override
-            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-
-                String mode = image.getMode() != null ? image.getMode() : "inside";
-                switch (mode) {
-                    case "custom":
-                        setCustomMode(resource, image);
-                        break;
-                    case "crop":
-                        setCropMode(resource, image);
-                        break;
-                    default:
-                        setInsideMode(resource, image);
-                        break;
-                }
-
-                mTextView.setVisibility(View.GONE);
-                mProgress.setVisibility(View.GONE);
-            }
-        });
+                        mTextView.setVisibility(View.GONE);
+                        mProgress.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).submit();
 
     }
 

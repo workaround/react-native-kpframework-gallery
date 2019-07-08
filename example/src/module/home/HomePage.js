@@ -71,23 +71,23 @@ const images = [
         source: require('./test00.png'),
         mode: 'crop',
     },
-    // {
-    //     source: {
-    //         uri:
-    //             'http://m.qpic.cn/psu?/43967169/Y.YMon9Po5EyLcZVxakkQnZn0y.O5dEjvtvA0bKXv9A!/b/YfBXWBFokwAAYrBHfRI4VAAA&a=29&b=31&bo=ngKEAQAAAAABEC4!&rf=viewer_4',
-    //     },
-    // },
-    // {
-    //     source: {
-    //         uri:
-    //             'http://m.qpic.cn/psu?/43967169/.P4OPC7dpQi5WtD7AJjRMloPZJIM4w.5wSJ7wCiLFjM!/b/Yf.ZShHKVAAAYsfQfhK4VAAA&a=29&b=31&bo=AAKOAQAAAAABELo!&rf=viewer_4',
-    //     },
-    //     mode: 'custom',
-    //     minScale: 0.5,
-    //     maxScale: 2,
-    //     debug: false,
-    // },
-    // {
-    //     source: require('./test11.jpg'),
-    // },
+    {
+        source: {
+            uri:
+                'http://m.qpic.cn/psu?/43967169/Y.YMon9Po5EyLcZVxakkQnZn0y.O5dEjvtvA0bKXv9A!/b/YfBXWBFokwAAYrBHfRI4VAAA&a=29&b=31&bo=ngKEAQAAAAABEC4!&rf=viewer_4',
+        },
+    },
+    {
+        source: {
+            uri:
+                'http://m.qpic.cn/psu?/43967169/.P4OPC7dpQi5WtD7AJjRMloPZJIM4w.5wSJ7wCiLFjM!/b/Yf.ZShHKVAAAYsfQfhK4VAAA&a=29&b=31&bo=AAKOAQAAAAABELo!&rf=viewer_4',
+        },
+        mode: 'custom',
+        minScale: 0.5,
+        maxScale: 2,
+        debug: false,
+    },
+    {
+        source: require('./test11.jpg'),
+    },
 ];
