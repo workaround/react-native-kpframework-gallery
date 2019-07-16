@@ -1,94 +1,86 @@
 package com.xukj.kpframework.gallery;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.xukj.kpframework.gallery.R;
-import com.xukj.kpframework.gallery.KPGalleryModule;
 
 import java.util.ArrayList;
 
-
-public class ViewPagerActivity extends AppCompatActivity {
+public class KPGalleryView extends RelativeLayout {
+    private static final String TAG = "KPGalleryView";
 
     private ViewPagerBar mHeader;
     private KPViewPager mViewPager;
     private ViewPageTextView mPageText;
     private SeekBar mSeekBar;
     private GestureDetector mGestureDetector;
+    private ReactContext mContext;
+    private ScreenSlidePagerAdapter mAdapter;
+
+    // 数据
+    private Intent mIntent;
 
     // gallery图片
     private ArrayList<PhotoImage> mImages = new ArrayList<>();
     private int mPosition = 0;
     private boolean useSeek = false;
 
+    public KPGalleryView(ReactContext context) {
+        super(context);
+        this.init(context);
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setOrientatoinConfiguration();
-        setContentView(R.layout.view_pager);
-
-        setDefaultConfiguration();
+    private void init(ReactContext context) {
+        this.mContext = context;
+        inflate(context, R.layout.view_pager, this);
+        setBackgroundColor(Color.BLACK);
         setHeaderConfiguration();
         setViewPagerConfiguration();
         setSeekConfig();
         setGestureConfig();
-        changeTitle();
-    }
-
-    @Override
-    public void onBackPressed() {
-//        closeActivity();
-        super.onBackPressed();
-    }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        mGestureDetector.onTouchEvent(ev);
-        return super.dispatchTouchEvent(ev);
-    }
-
-    private void changeTitle() {
-        mHeader.getTitleBarTitle().setText((mPosition + 1) + " / " + mImages.size());
     }
 
     private void setOrientatoinConfiguration() {
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = mIntent.getExtras();
         String orientation = bundle.getString("orientation");
-        if (orientation.equals("portrait")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-        else if (orientation.equals("landscape")) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-        }
-        else {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        }
+        // TODO
+//        if (orientation.equals("portrait")) {
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        }
+//        else if (orientation.equals("landscape")) {
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+//        }
+//        else {
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+//        }
     }
 
 
     private void setDefaultConfiguration() {
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = mIntent.getExtras();
         mPosition = bundle.getInt("index");
         mImages = bundle.getParcelableArrayList("images");
         useSeek = bundle.getBoolean("seek");
+        mAdapter.notifyDataSetChanged();
+        changeTitle();
+        mSeekBar.setMax(mImages.size() - 1 >= 0 ? mImages.size() - 1 : 0);
+        mSeekBar.setProgress(mPosition);
     }
 
     private void setHeaderConfiguration() {
@@ -97,15 +89,15 @@ public class ViewPagerActivity extends AppCompatActivity {
         mHeader.getTitleBarLeftBtn().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                closeActivity();
+                onCloseClick();
             }
         });
     }
 
     private void setViewPagerConfiguration() {
-        // 分页
+        mAdapter = new ScreenSlidePagerAdapter(mContext);
         mViewPager = findViewById(R.id.horizontal_pager);
-        mViewPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(mAdapter);
         mViewPager.addOnPageChangeListener(new KPViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -140,7 +132,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     private void setSeekConfig() {
         mPageText = findViewById(R.id.notice);
         mPageText.getTitleText().setText(String.valueOf(mPosition + 1));
-        mPageText.setVisibility(View.GONE);
+        mPageText.setVisibility(View.INVISIBLE);
 
         mSeekBar = findViewById(R.id.seekbar);
         mSeekBar.setMax(mImages.size() - 1 >= 0 ? mImages.size() - 1 : 0);
@@ -158,14 +150,14 @@ public class ViewPagerActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mPageText.setVisibility(View.GONE);
+                mPageText.setVisibility(View.INVISIBLE);
                 mViewPager.setCurrentItem(seekBar.getProgress(), true);
             }
         });
     }
 
     private void setGestureConfig() {
-        mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 if (useSeek) {
@@ -177,13 +169,8 @@ public class ViewPagerActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 关闭当前界面
-     */
-    private void closeActivity() {
-        // 关闭当前界面
-        sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONCLOSE, null);
-        finish();
+    private void changeTitle() {
+        mHeader.getTitleBarTitle().setText((mPosition + 1) + " / " + mImages.size());
     }
 
     /**
@@ -193,25 +180,56 @@ public class ViewPagerActivity extends AppCompatActivity {
      * @param params 数据
      */
     private void sendEventToJS(String name, @Nullable WritableMap params) {
-        ReactContext context = KPGalleryModule.context;
-        context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(name, params);
+        mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(name, params);
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
+    private class ScreenSlidePagerAdapter extends PagerAdapter {
+
+        private Context adapterContext;
+
+        public ScreenSlidePagerAdapter(Context context) {
+            super();
+            this.adapterContext = context;
         }
 
         @Override
-        public Fragment getItem(int position) {
-            ViewPagerFragment fragment = new ViewPagerFragment();
-            fragment.setImage(mImages.get(position));
-            return fragment;
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            KPGalleryViewItem item = new KPGalleryViewItem(adapterContext);
+            container.addView(item);
+            item.loadPhotoImage(mImages.get(position));
+            return item;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView((View)object);
         }
 
         @Override
         public int getCount() {
             return mImages.size();
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        mGestureDetector.onTouchEvent(ev);
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void onCloseClick() {
+        sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONCLOSE, null);
+    }
+
+    public void setmIntent(Intent mIntent) {
+        this.mIntent = mIntent;
+        setOrientatoinConfiguration();
+        setDefaultConfiguration();
     }
 }

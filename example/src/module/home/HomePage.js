@@ -29,6 +29,7 @@ export default class HomePage extends React.PureComponent {
                 onPress={this._onPress}
                 onSizePress={this._onSizePress}
                 onClearPress={this._onClearPress}
+                onViewModePress={this._onViewModePress}
             />
         );
     }
@@ -63,6 +64,10 @@ export default class HomePage extends React.PureComponent {
             .catch(error => {
                 this.setState({ message: error.message });
             });
+    };
+
+    _onViewModePress = () => {
+        Actions.push('gallery');
     };
 }
 

@@ -7,6 +7,7 @@
 import React from 'react';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 import { HomePage } from '../module/home';
+import { GalleryPage } from '../module/gallery';
 
 export default class AppRouter extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export default class AppRouter extends React.Component {
             <Router>
                 <Stack headerMode="screen" initial>
                     <Scene key="home" title="首页" component={HomePage} initial />
+                    <Scene key="gallery" title="首页" component={GalleryPage} hideNavBar />
                 </Stack>
             </Router>
         );

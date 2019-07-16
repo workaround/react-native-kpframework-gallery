@@ -1,25 +1,22 @@
 package com.xukj.kpframework.gallery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.KeyEvent;
 
-import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
-import com.xukj.kpframework.gallery.PhotoImage;
-import com.xukj.kpframework.gallery.ViewPagerActivity;
-
+import com.facebook.react.uimanager.SimpleViewManager;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.ArrayList;
 
-
-public class KPGalleryModule extends ReactContextBaseJavaModule {
+public class KPGalleryViewManager extends SimpleViewManager<KPGalleryView> {
+    private static final String TAG = "KPGalleryViewManager";
+    public static final String REACT_CLASS = "KPGalleryView";
 
     // 图片地址
     private ArrayList<PhotoImage> images = new ArrayList<>();
@@ -33,68 +30,31 @@ public class KPGalleryModule extends ReactContextBaseJavaModule {
 
     private ReadableMap options;
 
+    private ThemedReactContext reactContext = null;
 
-    public static ReactContext context;
-    private ReactContext mReactContext;
-
-    public KPGalleryModule(ReactApplicationContext context) {
-        super(context);
-        this.mReactContext = context;
-        KPGalleryModule.context = context;
-    }
 
     @Override
     public String getName() {
-        return "KPGallery";
+        return REACT_CLASS;
     }
 
-    /**
-     * 开启图片浏览器
-     *
-     * @param options 配置
-     */
-    @ReactMethod
-    public void showGallery(ReadableMap options) {
-        this.options = options;
-        setConfiguration(options);
+    @Override
+    protected KPGalleryView createViewInstance(ThemedReactContext reactContext) {
+        this.reactContext = reactContext;
+        return new KPGalleryView(reactContext);
+    }
 
+    @ReactProp(name="options")
+    public void setOptions(KPGalleryView view, ReadableMap options) {
+        setConfiguration(options);
         Intent intent = new Intent();
-        intent.setClass(mReactContext, ViewPagerActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("images", images);
         bundle.putInt("index", index);
         bundle.putString("orientation", orientation);
         bundle.putBoolean("seek", seek);
         intent.putExtras(bundle);
-        mReactContext.startActivity(intent);
-    }
-
-    /**
-     * 获取缓存大小
-     * @param options
-     * @param promise
-     */
-    @ReactMethod
-    public void getCacheSize(ReadableMap options, Promise promise) {
-        long size = KPCacheUtil.getInstance().getCacheSize(mReactContext);
-        promise.resolve(String.valueOf(size));
-    }
-
-    /**
-     * 清空缓存
-     * @param options
-     * @param promise
-     */
-    @ReactMethod
-    public void clearCache(ReadableMap options, Promise promise) {
-        boolean result = KPCacheUtil.getInstance().clearCache(mReactContext);
-        if (result) {
-            promise.resolve(null);
-        }
-        else {
-            promise.reject("-1", "清除缓存出错");
-        }
+        view.setmIntent(intent);
     }
 
     private void setConfiguration(final ReadableMap options) {

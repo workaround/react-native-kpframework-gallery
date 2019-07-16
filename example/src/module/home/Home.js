@@ -14,6 +14,7 @@ export default class Home extends React.PureComponent {
         onPress: PropTypes.func,
         onSizePress: PropTypes.func,
         onClearPress: PropTypes.func,
+        onViewModePress: PropTypes.func,
     };
 
     static defaultProps = {
@@ -47,6 +48,11 @@ export default class Home extends React.PureComponent {
                 <TouchableWithoutFeedback onPress={this.props.onClearPress}>
                     <View>
                         <Text style={styles.button}>清空缓存</Text>
+                    </View>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={this.props.onViewModePress}>
+                    <View>
+                        <Text style={styles.button}>view形式</Text>
                     </View>
                 </TouchableWithoutFeedback>
             </View>
