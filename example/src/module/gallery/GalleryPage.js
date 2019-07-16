@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
-import { KPGalleryView } from 'react-native-kpframework-gallery';
+import { KPAndroidGalleryView } from 'react-native-kpframework-gallery';
 import { Actions } from 'react-native-router-flux';
 
 export default class GalleryPage extends React.PureComponent {
@@ -24,7 +24,7 @@ export default class GalleryPage extends React.PureComponent {
     render() {
         return (
             <View style={styles.page}>
-                <KPGalleryView
+                <KPAndroidGalleryView
                     style={{ flex: 1 }}
                     options={{ images, debug: true, mode: 'crop', orientation: 'auto', seek: true }}
                     onPageChanged={index => console.log('onPageChanged:' + index)}
