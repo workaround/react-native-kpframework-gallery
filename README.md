@@ -189,7 +189,12 @@ iOS 端必须在 AppDelegate.m 中指定支持的横竖屏模式
 ### 6. KPAndroidGalleryView  
 在RN中，android端直接打开activity，有时会出现不可预料的task切换的问题； 如果无法直接使用startActivity的方式切换界面，那可以直接使用该组件在界面上绘制；
   
-参数 `options` `onPageChanged` `onClose` 与前面使用方式一致  
+ - `options` `onPageChanged` `onClose`   
+   **与前面使用方式一致**  
+ - orientation  
+   **无效**  
+ - onClosePress  
+   **新增点击关闭事件**  
   
 ```jsx
 import { KPAndroidGalleryView } from "react-native-kpframework-gallery";
@@ -200,10 +205,11 @@ import { KPAndroidGalleryView } from "react-native-kpframework-gallery";
     images,
     debug: true,
     mode: "crop",
-    orientation: "auto",
+    orientation: "auto", // orientation无效
     seek: true
   }}
   onPageChanged={index => console.log("onPageChanged:" + index)}
-  onClose={Actions.pop}
+  onClosePress={() => console.log('点击关闭按钮')}
+  onClose={() => console.log('组件销毁')}
 />;
 ```
