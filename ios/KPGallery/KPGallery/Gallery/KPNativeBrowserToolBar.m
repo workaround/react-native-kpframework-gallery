@@ -38,6 +38,18 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     return self;
 }
 
+- (void)resizeLabelFrame
+{
+    // 获取中心点
+    CGPoint center = self.center;
+    center.y = center.y + (CGRectGetHeight(self.bounds) - kToolBarDefaultsHeight) / 2;
+    // 计算文本大小
+    NSString *text = self.indexLabel.text ? : @"";
+    CGRect textBounds = [text boundingRectWithSize:self.bounds.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.indexLabel.font} context:nil];
+    self.indexLabel.bounds = CGRectInset(textBounds, -16, -8);
+    self.indexLabel.center = center;
+}
+
 #pragma mark - <YBImageBrowserToolBarProtocol>
 
 - (void)yb_browserUpdateLayoutWithDirection:(YBImageBrowserLayoutDirection)layoutDirection containerSize:(CGSize)containerSize {
@@ -54,7 +66,8 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
     self.frame = CGRectMake(0, 0, width, height);
     self.gradient.frame = self.bounds;
     
-    self.indexLabel.frame = CGRectMake((width - labelWidth) / 2, height - kToolBarDefaultsHeight, labelWidth + 10, kToolBarDefaultsHeight);
+//    self.indexLabel.frame = CGRectMake((width - labelWidth) / 2, height - kToolBarDefaultsHeight, labelWidth + 10, kToolBarDefaultsHeight);
+    [self resizeLabelFrame];
     
     self.closeButton.frame = CGRectMake(0, height - kToolBarDefaultsHeight, buttonWidth, kToolBarDefaultsHeight);
 }
@@ -62,6 +75,7 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
 - (void)yb_browserPageIndexChanged:(NSUInteger)pageIndex totalPage:(NSUInteger)totalPage data:(id<YBImageBrowserCellDataProtocol>)data {
     self->_data = data;
     self.indexLabel.text = [NSString stringWithFormat:@"%ld / %ld", pageIndex + 1, totalPage];
+    [self resizeLabelFrame];
 }
 
 #pragma mark - event
@@ -77,7 +91,7 @@ static CGFloat kToolBarDefaultsHeight = 50.0;
         _indexLabel = [KPGalleryLabel new];
         _indexLabel.textColor = [UIColor whiteColor];
         _indexLabel.font = [UIFont boldSystemFontOfSize:18];
-        _indexLabel.textAlignment = NSTextAlignmentCenter;
+        _indexLabel.textAlignment = NSTextAlignmentRight;
         _indexLabel.kpAlignment = KPAlignmentMiddle;
         _indexLabel.adjustsFontSizeToFitWidth = YES;
         _indexLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
