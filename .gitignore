@@ -92,3 +92,5 @@ example/ios/pods
 .settings
 local.properties
 *.iml
+example/ios/Podfile.lock
+example/yarn.lock
