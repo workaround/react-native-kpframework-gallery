@@ -22,13 +22,17 @@ export default class GalleryPage extends React.PureComponent {
     componentDidMount() {}
 
     render() {
+        const largeImages = images.concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images);
         return (
             <View style={styles.page}>
                 <KPAndroidGalleryView
                     style={{ flex: 1 }}
-                    options={{ images, debug: true, mode: 'crop', orientation: 'auto', seek: true }}
+                    options={{ images: largeImages, debug: true, mode: 'crop', orientation: 'auto', seek: true }}
                     onPageChanged={index => console.log('onPageChanged:' + index)}
-                    onClose={Actions.pop}
+                    onClose={() => {
+                        console.log('关闭');
+                        Actions.pop();
+                    }}
                 />
             </View>
         );

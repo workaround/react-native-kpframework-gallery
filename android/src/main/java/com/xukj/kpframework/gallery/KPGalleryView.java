@@ -171,6 +171,7 @@ public class KPGalleryView extends RelativeLayout {
 
     private void changeTitle() {
         mHeader.getTitleBarTitle().setText((mPosition + 1) + " / " + mImages.size());
+        mHeader.requestLayout();
     }
 
     /**
@@ -224,7 +225,7 @@ public class KPGalleryView extends RelativeLayout {
     }
 
     private void onCloseClick() {
-        sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONCLOSE, null);
+        sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONCLOSEPRESS, null);
     }
 
     public void setmIntent(Intent mIntent) {

@@ -12,6 +12,7 @@ public class KPGalleryConstant {
 
     public static final String KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
     public static final String KPPHOTO_GALLERY_EVENT_ONCLOSE = "KPPHOTO_GALLERY_EVENT_ONCLOSE";
+    public static final String KPPHOTO_GALLERY_EVENT_ONCLOSEPRESS = "KPPHOTO_GALLERY_EVENT_ONCLOSEPRESS";
 
     public static final String KPPHOTO_GALLERY_KEY_INDEX = "index";
 }

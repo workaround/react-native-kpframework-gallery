@@ -54,12 +54,6 @@ public class ViewPagerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-//        closeActivity();
-        super.onBackPressed();
-    }
-
-    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         mGestureDetector.onTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
@@ -97,7 +91,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         mHeader.getTitleBarLeftBtn().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                closeActivity();
+                finish();
             }
         });
     }
@@ -177,13 +171,10 @@ public class ViewPagerActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 关闭当前界面
-     */
-    private void closeActivity() {
-        // 关闭当前界面
+    @Override
+    protected void onDestroy() {
         sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONCLOSE, null);
-        finish();
+        super.onDestroy();
     }
 
     /**

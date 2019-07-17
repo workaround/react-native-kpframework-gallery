@@ -39,8 +39,9 @@ export default class HomePage extends React.PureComponent {
      * @description 点击详情
      */
     _onPress = () => {
+        const largeImages = images.concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images).concat(images);
         KPGallery.showGallery(
-            { images, debug: true, mode: 'crop', orientation: 'auto', seek: true },
+            { images: largeImages, debug: true, mode: 'crop', orientation: 'auto', seek: true },
             index => {
                 this.setState({ message: `页面 ${index}` });
             },
