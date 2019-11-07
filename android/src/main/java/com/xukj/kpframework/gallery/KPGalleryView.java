@@ -76,11 +76,18 @@ public class KPGalleryView extends RelativeLayout {
         Bundle bundle = mIntent.getExtras();
         mPosition = bundle.getInt("index");
         mImages = bundle.getParcelableArrayList("images");
+        // 防止越界
+        mPosition = (mImages.size() > mPosition && mPosition >= 0) ? mPosition : 0;
         useSeek = bundle.getBoolean("seek");
         mAdapter.notifyDataSetChanged();
         changeTitle();
         mSeekBar.setMax(mImages.size() - 1 >= 0 ? mImages.size() - 1 : 0);
         mSeekBar.setProgress(mPosition);
+
+        // 如果设置了默认初始化的index，则这里需要移动pager
+        if (mPosition > 0) {
+            mViewPager.setCurrentItem(mPosition);
+        }
     }
 
     private void setHeaderConfiguration() {
