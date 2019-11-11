@@ -6,6 +6,11 @@
 
 图片浏览器，支持左右滑动，手势缩放，双击缩放，网络图片下载缓存并显示，本地图片显示。支持超大图片的浏览。
 
+## 兼容
+  
+version 0.4.x requires react-native >= 0.61.0
+version 0.3.x requires react-native >= 0.56.0
+
 ## 原生库
 
 - Android  
