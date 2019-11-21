@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
