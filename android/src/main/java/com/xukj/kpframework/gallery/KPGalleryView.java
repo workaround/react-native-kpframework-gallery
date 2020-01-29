@@ -90,6 +90,17 @@ public class KPGalleryView extends RelativeLayout {
         }
     }
 
+    private void setPageNumber(){
+        Bundle bundle = mIntent.getExtras();
+        mViewPager.setCurrentItem(bundle.getInt("pagenumber"));
+    }
+
+    private void setShowHeader(){
+        Bundle bundle = mIntent.getExtras();
+        boolean showHeader = bundle.getBoolean("header");
+        mHeader.setVisibility(showHeader ? View.VISIBLE : View.INVISIBLE);
+    }
+
     private void setHeaderConfiguration() {
         // 高度
         mHeader = findViewById(R.id.header);
@@ -135,6 +146,7 @@ public class KPGalleryView extends RelativeLayout {
             mViewPager.setCurrentItem(mPosition);
         }
     }
+
 
     private void setSeekConfig() {
         mPageText = findViewById(R.id.notice);
@@ -239,5 +251,7 @@ public class KPGalleryView extends RelativeLayout {
         this.mIntent = mIntent;
         setOrientatoinConfiguration();
         setDefaultConfiguration();
+        setPageNumber();
+        setShowHeader();
     }
 }

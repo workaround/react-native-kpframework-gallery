@@ -3,6 +3,7 @@
     style="@style/kp_fill">
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+
         android:id="@+id/imageView"
         style="@style/kp_fill" />
 

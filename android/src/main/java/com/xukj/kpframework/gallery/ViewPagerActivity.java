@@ -16,12 +16,15 @@ import android.widget.SeekBar;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.xukj.kpframework.gallery.R;
 import com.xukj.kpframework.gallery.KPGalleryModule;
 
 import java.util.ArrayList;
+
+import static com.facebook.react.common.ReactConstants.TAG;
 
 
 public class ViewPagerActivity extends AppCompatActivity {
@@ -45,11 +48,14 @@ public class ViewPagerActivity extends AppCompatActivity {
         setOrientatoinConfiguration();
         setContentView(R.layout.view_pager);
 
+
         setDefaultConfiguration();
         setHeaderConfiguration();
         setViewPagerConfiguration();
         setSeekConfig();
         setGestureConfig();
+        setPageNumber();
+        setShowHeader();
         changeTitle();
     }
 
@@ -75,6 +81,19 @@ public class ViewPagerActivity extends AppCompatActivity {
         else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
+
+    }
+
+    private void setPageNumber(){
+        Bundle bundle = getIntent().getExtras();
+        mViewPager.setCurrentItem(bundle.getInt("pagenumber"));
+    }
+
+    private void setShowHeader(){
+        Bundle bundle = getIntent().getExtras();
+        boolean showHeader = bundle.getBoolean("header");
+
+        mHeader.setVisibility(showHeader ? View.GONE : View.VISIBLE);
     }
 
 
@@ -94,6 +113,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private void setViewPagerConfiguration() {
@@ -169,6 +189,13 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @ReactMethod
+    public void setCurrentPage(int page){
+
+        mViewPager.setCurrentItem(page);
+        Log.i(TAG,"Invocato setCurrentPage");
     }
 
     @Override

@@ -27,6 +27,8 @@ public class KPGalleryViewManager extends SimpleViewManager<KPGalleryView> {
     private boolean debug = false;
     private String orientation = "auto";
     private boolean seek = false;
+    private int pagenumber = 0;
+    private boolean header = true;
 
     private ReadableMap options;
 
@@ -53,6 +55,8 @@ public class KPGalleryViewManager extends SimpleViewManager<KPGalleryView> {
         bundle.putInt("index", index);
         bundle.putString("orientation", orientation);
         bundle.putBoolean("seek", seek);
+        bundle.putInt("pagenumber",pagenumber);
+        bundle.putBoolean("header",header);
         intent.putExtras(bundle);
         view.setmIntent(intent);
     }
@@ -65,13 +69,14 @@ public class KPGalleryViewManager extends SimpleViewManager<KPGalleryView> {
         mode = options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_MODE) ? options.getString(KPGalleryConstant.KPPHOTO_GALLERY_KEY_MODE) : mode;
         orientation = options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_ORIENTATION) ? options.getString(KPGalleryConstant.KPPHOTO_GALLERY_KEY_ORIENTATION) : orientation;
         seek = options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_USESEEK) ? options.getBoolean(KPGalleryConstant.KPPHOTO_GALLERY_KEY_USESEEK) : seek;
+        pagenumber = options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_PAGENUMBER) ? options.getInt(KPGalleryConstant.KPPHOTO_GALLERY_KEY_PAGENUMBER) : pagenumber;
+        header = options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_HEADER) ? options.getBoolean(KPGalleryConstant.KPPHOTO_GALLERY_KEY_HEADER) : header;
 
         images.clear();
         if (options.hasKey(KPGalleryConstant.KPPHOTO_GALLERY_KEY_IMAGES)) {
             setPhotoImages(options.getArray(KPGalleryConstant.KPPHOTO_GALLERY_KEY_IMAGES));
         }
 
-        Log.v("orientation", orientation);
     }
 
     private void setPhotoImages(final ReadableArray images) {

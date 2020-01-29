@@ -129,5 +129,6 @@ public class KPGalleryViewItem extends RelativeLayout {
         mImageView.setMaxScale(image.getMaxScale());
         mImageView.setDebug(image.isDebug());
         mImageView.setImage(ImageSource.uri(Uri.fromFile(resource)));
+        mImageView.setScaleAndCenter(0,new PointF(0,0));
     }
 }
