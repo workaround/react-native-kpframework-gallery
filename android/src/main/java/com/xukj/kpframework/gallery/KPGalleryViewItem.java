@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -29,6 +30,7 @@ public class KPGalleryViewItem extends RelativeLayout {
     private SubsamplingScaleImageView mImageView;
     private ProgressBar mProgress;
     private TextView mTextView;
+    private ImageView mLoadFailed;
 
     public KPGalleryViewItem(Context context) {
         super(context);
@@ -48,6 +50,7 @@ public class KPGalleryViewItem extends RelativeLayout {
         mImageView = this.findViewById(R.id.imageView);
         mProgress = this.findViewById(R.id.loading);
         mTextView = this.findViewById(R.id.info);
+        mLoadFailed = this.findViewById(R.id.brokenImage);
     }
 
     public void loadPhotoImage(final PhotoImage image) {
@@ -55,6 +58,7 @@ public class KPGalleryViewItem extends RelativeLayout {
         mProgress.setVisibility(View.VISIBLE);
         mTextView.setText("");
         mTextView.setVisibility(View.GONE);
+        mLoadFailed.setVisibility(View.GONE);
         Glide.with(this).asFile().load(image.getUri())
                 .listener(new RequestListener<File>() {
 
@@ -62,7 +66,8 @@ public class KPGalleryViewItem extends RelativeLayout {
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<File> target, boolean isFirstResource) {
                         mProgress.setVisibility(View.GONE);
                         mTextView.setText("图片加载失败");
-                        mTextView.setVisibility(View.VISIBLE);
+                        //mTextView.setVisibility(View.VISIBLE);
+                        mLoadFailed.setVisibility(View.VISIBLE);
                         return false;
                     }
 
@@ -83,6 +88,7 @@ public class KPGalleryViewItem extends RelativeLayout {
                         }
 
                         mTextView.setVisibility(View.GONE);
+                        mLoadFailed.setVisibility(View.GONE);
                         mProgress.setVisibility(View.GONE);
                         return false;
                     }

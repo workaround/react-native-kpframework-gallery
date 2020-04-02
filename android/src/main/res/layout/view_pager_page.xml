@@ -27,4 +27,13 @@
         android:visibility="gone"
         />
 
+    <ImageView
+        android:id="@+id/brokenImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@android:drawable/ic_menu_report_image"
+        android:visibility="gone"
+        />
+
 </RelativeLayout>
