@@ -9,10 +9,10 @@ import { NativeEventEmitter, requireNativeComponent } from "react-native";
 const resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
 const config = {};
 
-// 配置信息
-const KPPHOTO_GALLERY_EVENT_ONPAGECHANGED =
-  "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
+// Configuration information
+const KPPHOTO_GALLERY_EVENT_ONPAGECHANGED = "KPPHOTO_GALLERY_EVENT_ONPAGECHANGED";
 const KPPHOTO_GALLERY_EVENT_ONCLOSEPRESS = "KPPHOTO_GALLERY_EVENT_ONCLOSEPRESS";
+const KPPHOTO_GALLERY_EVENT_ONSINGLETAP = "KPPHOTO_GALLERY_EVENT_ONSINGLETAP";
 const NativeEventModule = new NativeEventEmitter(KPAndroidGalleryView);
 
 export default class KPGalleryView extends React.PureComponent {
@@ -20,7 +20,8 @@ export default class KPGalleryView extends React.PureComponent {
     options: PropTypes.object,
     onPageChanged: PropTypes.func,
     onClose: PropTypes.func,
-    onClosePress: PropTypes.func
+    onClosePress: PropTypes.func,
+    onSingleTap: PropTypes.func
   };
 
   static defaultProps = {
@@ -41,12 +42,20 @@ export default class KPGalleryView extends React.PureComponent {
         if (this.props.onClosePress) this.props.onClosePress();
       }
     );
+    
+    this.onSingleTapListener = NativeEventModule.addListener(
+      KPPHOTO_GALLERY_EVENT_ONSINGLETAP,
+      () => {
+        if (this.props.onSingleTap) this.props.onSingleTap();
+      }
+    );
   }
 
   componentWillUnmount() {
     if (this.onPageChangedListener) this.onPageChangedListener.remove();
     if (this.onCloseListener) this.onCloseListener.remove();
     if (this.props.onClose) this.props.onClose();
+    if (this.onSingleTapListener) this.onSingleTapListener.remove();
   }
 
   render() {
