@@ -73,7 +73,7 @@ public class KPGalleryViewItem extends RelativeLayout {
 
                     @Override
                     public boolean onResourceReady(File resource, Object model, Target<File> target, DataSource dataSource, boolean isFirstResource) {
-                        Log.i("photo", "图片加载完成");
+                        Log.i("photo", "Picture loading is complete");
                         String mode = image.getMode() != null ? image.getMode() : "inside";
                         switch (mode) {
                             case "custom":
