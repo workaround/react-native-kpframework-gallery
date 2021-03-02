@@ -179,6 +179,7 @@ public class KPGalleryView extends RelativeLayout {
         mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+                sendEventToJS(KPGalleryConstant.KPPHOTO_GALLERY_EVENT_ONSINGLETAP, null);
                 if (useSeek) {
                     mSeekBar.setVisibility(mSeekBar.getVisibility() == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
                 }
